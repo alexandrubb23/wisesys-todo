@@ -66,7 +66,9 @@ const TasksTable = ({ tasks }: TasksListProps) => {
     setSortColumn({ ...sortColumn });
   }, []);
 
-  const sortedTasks = orderBy(tasks, [sortColumn.path], [sortColumn.order]);
+  const { path, order } = sortColumn;
+
+  const sortedTasks = orderBy(tasks, [path], [order]);
 
   return (
     <Table
