@@ -1,53 +1,18 @@
-import { HStack, Spinner, VStack } from '@chakra-ui/react';
+import { Spinner, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
-import { Column, SortColumn, Task } from '../common/models';
-import AddTaskDrawer from './AddTaskDrawer';
-import AlertError from '../common/AlertError';
-import Content from '../common/models/content.type';
-import DeleteTaskButton from './DeleteTaskButton';
-import EditTaskDrawer from './EditTaskDrawer';
-import SearchInput from '../SearchInput';
-import Table from '../common/Table';
+import { useToast } from '../../hooks';
 import useTasks from '../../hooks/useTasks';
-
-const columns: Column<Task>[] = [
-  {
-    path: 'id',
-    label: 'ID',
-    isSortable: true,
-  },
-  {
-    path: 'title',
-    label: 'Title',
-    isSortable: true,
-  },
-  {
-    path: 'description',
-    label: 'Description',
-  },
-  {
-    path: 'createDate',
-    label: 'Create Date',
-    isSortable: true,
-  },
-  {
-    path: 'actions',
-    label: 'Actions',
-    content: (data: Content<Task>) => {
-      const { item, onDelete } = data;
-      return (
-        <HStack spacing={4}>
-          <EditTaskDrawer task={item} />
-          <DeleteTaskButton task={item} onDelete={onDelete} />
-        </HStack>
-      );
-    },
-  },
-];
+import SearchInput from '../SearchInput';
+import AlertError from '../common/AlertError';
+import Table from '../common/Table';
+import { SortColumn, Task } from '../common/models';
+import AddTaskDrawer from './AddTaskDrawer';
+import columns from './columns';
 
 const TasksTable = () => {
+  const toast = useToast();
   const { data: tasks, isLoading, error } = useTasks();
 
   // This is just for demonstration purposes
@@ -74,6 +39,11 @@ const TasksTable = () => {
     if (index === -1) return;
 
     setDeletedTask([...deletedTask, task.id]);
+
+    toast.success(
+      'Task deleted',
+      `Task ${task.title} was successfully deleted.`
+    );
   };
 
   const sortedTasks = orderBy(tasks, [sortColumn.path], [sortColumn.order]);

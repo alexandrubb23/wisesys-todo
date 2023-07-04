@@ -8,7 +8,7 @@ const TableHeader = <T extends TableData>({
   columns,
   sortColumn,
   onSort,
-}: Omit<TableProps<T>, 'data' | 'onSearch' | 'onDelete'>) => {
+}: Pick<TableProps<T>, 'columns' | 'sortColumn' | 'onSort'>) => {
   const handleSort = (path: string) => {
     if (sortColumn.path === path) {
       sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
