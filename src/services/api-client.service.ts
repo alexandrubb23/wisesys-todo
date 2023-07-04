@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/',
 });
 
 class APIClient<T> {
-  constructor(private endpoint: string) {
+  constructor(protected endpoint: string) {
     this.endpoint = endpoint;
   }
 
@@ -22,7 +22,6 @@ class APIClient<T> {
   };
 
   update = (id: number, data: T) => {
-    console.log(`${this.endpoint}/${id}`);
     return axiosInstance
       .put<T>(`${this.endpoint}/${id}`, data)
       .then(res => res.data);

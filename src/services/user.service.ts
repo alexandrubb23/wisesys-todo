@@ -1,4 +1,4 @@
-import APIClient from './api-client.service';
+import { UserAPIClient } from './auth.service';
 
 export type User = {
   firstName: string;
@@ -7,4 +7,4 @@ export type User = {
   password: string;
 };
 
-export default new APIClient<User>('/users');
+export default new UserAPIClient('/users');

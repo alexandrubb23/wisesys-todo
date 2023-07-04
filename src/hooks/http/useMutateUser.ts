@@ -14,7 +14,7 @@ const useMutateUser = () => {
     onSuccess: (newUser: User) => {
       toast.success('User created', 'User created successfully');
 
-      authService.loginUser(newUser);
+      authService.saveUser(newUser);
 
       navigate('/tasks');
     },
