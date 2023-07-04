@@ -16,7 +16,7 @@ interface EditTaskFormProps {
 }
 
 const EditTaskForm = ({ task }: EditTaskFormProps) => {
-  const mutateTask = useMutateTask();
+  const { editTask } = useMutateTask();
 
   const { firstField, onClose } = useTaskDrawerContext();
 
@@ -34,7 +34,7 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
   };
 
   const handleFormSubmit = () => {
-    mutateTask.update(editedTask);
+    editTask.mutate(editedTask);
   };
 
   return (
@@ -61,7 +61,11 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
         <Button variant='outline' onClick={onClose}>
           Cancel
         </Button>
-        <Button colorScheme='blue' onClick={handleFormSubmit}>
+        <Button
+          colorScheme='blue'
+          isLoading={editTask.isLoading}
+          onClick={handleFormSubmit}
+        >
           Save
         </Button>
       </HStack>

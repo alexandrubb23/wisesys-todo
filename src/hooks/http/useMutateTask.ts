@@ -40,19 +40,7 @@ const useMutateTask = () => {
     onError,
   });
 
-  const create = (task: PartialTask) => {
-    createTask.mutate(task);
-  };
-
-  const update = (task: Task) => {
-    editTask.mutate(task);
-  };
-
-  const remove = (task: Task) => {
-    deleteTask.mutate(task);
-  };
-
-  return { create, update, remove };
+  return { createTask, editTask, deleteTask };
 };
 
 export default useMutateTask;

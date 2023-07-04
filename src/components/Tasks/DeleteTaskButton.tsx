@@ -23,17 +23,21 @@ const DeleteTaskButton = ({ task }: DeleteTaskButtonProps) => {
   const cancelRef = useRef<HTMLButtonElement>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const mutateTask = useMutateTask();
+  const { deleteTask } = useMutateTask();
 
   const handleDelete = () => {
     onClose();
 
-    mutateTask.remove(task);
+    deleteTask.mutate(task);
   };
 
   return (
     <>
-      <Button colorScheme='red' onClick={onOpen}>
+      <Button
+        colorScheme='red'
+        onClick={onOpen}
+        isLoading={deleteTask.isLoading}
+      >
         Delete
       </Button>
       <AlertDialog
