@@ -1,4 +1,4 @@
-import TasksList from './components/Tasks/TasksList';
+import TasksTable from './components/Tasks/TasksTable';
 
 const tasks = [
   {
@@ -34,7 +34,7 @@ const tasks = [
 ];
 
 const App = () => {
-  return <TasksList tasks={tasks} />;
+  return <TasksTable tasks={tasks} />;
 };
 
 export default App;
