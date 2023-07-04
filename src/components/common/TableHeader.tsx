@@ -1,7 +1,8 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { Th, Thead, Tr, TableColumnHeaderProps } from '@chakra-ui/react';
 
-import { Column, TableData, TableProps } from './Table';
+import { TableData } from './Table';
+import { Column, TableProps } from './models';
 
 const TableHeader = <T extends TableData>({
   columns,

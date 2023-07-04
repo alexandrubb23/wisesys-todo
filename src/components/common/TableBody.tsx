@@ -1,7 +1,8 @@
 import { Tbody, Td, Tr } from '@chakra-ui/react';
 import { get } from 'lodash';
 
-import { Column, TableData } from './Table';
+import { TableData } from './Table';
+import { Column } from './models';
 
 interface TableBodyProps<T> {
   columns: Column<T>[];

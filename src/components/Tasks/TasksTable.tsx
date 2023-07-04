@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
-import Table, { Column } from '../common/Table';
-import { orderBy } from 'lodash';
-import AddTaskDrawer from './AddTaskDrawer';
-import EditTaskDrawer from './EditTaskDrawer';
 import { Button, HStack } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { orderBy } from 'lodash';
 
-type OrderDirection = 'asc' | 'desc';
+import Table from '../common/Table';
+import AddTaskDrawer from './AddTaskDrawer';
+import EditTaskDrawer from './EditTaskDrawer';
+import { Column, OrderDirection, SortColumn } from '../common/models';
 
 type Task = {
   id: number;
@@ -55,11 +55,6 @@ const columns: Column<Task>[] = [
     },
   },
 ];
-
-export type SortColumn = {
-  order: OrderDirection;
-  path: string;
-};
 
 const TasksTable = ({ tasks }: TasksListProps) => {
   const [sortColumn, setSortColumn] = useState<SortColumn>({
