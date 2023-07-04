@@ -1,4 +1,4 @@
-import APIClient from './api-client';
+import APIClient from './api-client.service';
 
 export type User = {
   firstName: string;
