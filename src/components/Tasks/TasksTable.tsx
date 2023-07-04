@@ -1,12 +1,5 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import {
-  Alert,
-  AlertIcon,
-  Button,
-  HStack,
-  Spinner,
-  VStack,
-} from '@chakra-ui/react';
+import { Button, HStack, Spinner, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -16,6 +9,7 @@ import Table from '../common/Table';
 import { Column, SortColumn, Task } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
 import EditTaskDrawer from './EditTaskDrawer';
+import AlertError from '../common/AlertError';
 
 const columns: Column<Task>[] = [
   {
@@ -83,13 +77,7 @@ const TasksTable = () => {
 
   if (isLoading) return <Spinner />;
 
-  if (error)
-    return (
-      <Alert status='error'>
-        <AlertIcon />
-        {error.message}
-      </Alert>
-    );
+  if (error) return <AlertError message={error.message} />;
 
   return (
     <>
@@ -98,10 +86,7 @@ const TasksTable = () => {
         <AddTaskDrawer />
       </VStack>
       {searchedTasks.length === 0 ? (
-        <Alert status='info' mt={4}>
-          <AlertIcon />
-          To task found.
-        </Alert>
+        <AlertError mt={4} message='No tasks found.' status='info' />
       ) : (
         <Table
           columns={columns}
