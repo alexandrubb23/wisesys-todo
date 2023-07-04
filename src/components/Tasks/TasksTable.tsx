@@ -1,13 +1,21 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import { Button, HStack, VStack } from '@chakra-ui/react';
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  HStack,
+  VStack,
+} from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
+import SearchInput from '../SearchInput';
 import Table from '../common/Table';
 import { Column, SortColumn, Task } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
 import EditTaskDrawer from './EditTaskDrawer';
-import SearchInput from '../SearchInput';
+import ColorModeSwitch from '../ColorModeSwitch';
 
 interface TasksListProps {
   tasks: Task[];
@@ -76,19 +84,26 @@ const TasksTable = ({ tasks }: TasksListProps) => {
   );
 
   return (
-    <>
-      <VStack spacing={4} p={4} align='right'>
+    <Box p={4}>
+      <VStack spacing={4} align='right' mb={4}>
         <SearchInput onSearch={handleSearch} />
+        <ColorModeSwitch />
         <AddTaskDrawer />
       </VStack>
-
-      <Table
-        columns={columns}
-        data={searchedTasks}
-        onSort={handleSort}
-        sortColumn={sortColumn}
-      />
-    </>
+      {searchedTasks.length === 0 ? (
+        <Alert status='info' mt={4}>
+          <AlertIcon />
+          To task found.
+        </Alert>
+      ) : (
+        <Table
+          columns={columns}
+          data={searchedTasks}
+          onSort={handleSort}
+          sortColumn={sortColumn}
+        />
+      )}
+    </Box>
   );
 };
 

@@ -1,4 +1,6 @@
 import TasksTable from './components/Tasks/TasksTable';
+import Login from './components/auth/Login';
+import SignupCard from './components/auth/SignUp';
 
 const tasks = [
   {
@@ -64,6 +66,8 @@ const tasks = [
 ];
 
 const App = () => {
+  // return <SignupCard />;
+  // return <Login />;
   return <TasksTable tasks={tasks} />;
 };
 
