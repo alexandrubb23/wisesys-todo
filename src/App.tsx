@@ -1,9 +1,8 @@
-import { Heading } from '@chakra-ui/react';
-
 import './App.css';
+import Register from './components/auth/SignUp';
 
 const App = () => {
-  return <Heading>Welcome to Chakra UI!</Heading>;
+  return <Register />;
 };
 
 export default App;
