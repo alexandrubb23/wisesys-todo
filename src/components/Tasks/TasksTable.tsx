@@ -4,17 +4,10 @@ import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
 import Table from '../common/Table';
-import { Column, SortColumn } from '../common/models';
+import { Column, SortColumn, Task } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
 import EditTaskDrawer from './EditTaskDrawer';
 import SearchInput from '../SearchInput';
-
-type Task = {
-  id: number;
-  title: string;
-  description: string;
-  createDate: string;
-};
 
 interface TasksListProps {
   tasks: Task[];
@@ -46,7 +39,7 @@ const columns: Column<Task>[] = [
     content: (task: Task) => {
       return (
         <HStack spacing={4}>
-          <EditTaskDrawer />
+          <EditTaskDrawer task={task} />
           <Button colorScheme='red' leftIcon={<DeleteIcon />}>
             Delete
           </Button>
