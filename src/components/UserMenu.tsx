@@ -1,24 +1,46 @@
-import { Box, Flex, Image } from '@chakra-ui/react';
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList,
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
-import useAuth from '../hooks/useAuth';
+import authService from '../services/auth.service';
+import { useToast } from '../hooks';
 
-const UserMenu = () => {
-  const user = useAuth();
-  if (!user) return null;
+const UserMenu = ({ fullName }: { fullName: string }) => {
+  const navigate = useNavigate();
+  const toast = useToast();
 
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const handleLogout = () => {
+    authService.removeUser();
+
+    toast.success('Logout Success', 'You have been logged out.');
+
+    navigate('/');
+  };
 
   return (
-    <Flex alignItems='center' ml={4}>
-      <Box as='span'>{fullName}</Box>
-      <Image
-        borderRadius='full'
-        boxSize='30px'
-        src='https://media.licdn.com/dms/image/C4D03AQGYrzakscupmg/profile-displayphoto-shrink_100_100/0/1555158639067?e=1694044800&v=beta&t=vPV7q6CRyU6dXBK3uC5bGKs4gtjXMqSofNC-b34BWVk'
-        alt={fullName}
-        ml={2}
-      />
-    </Flex>
+    <Menu>
+      <MenuButton as={Button} colorScheme='teal'>
+        {fullName}
+      </MenuButton>
+      <MenuList>
+        <MenuGroup title='Profile'>
+          <MenuItem>My Account</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </MenuGroup>
+        <MenuDivider />
+        <MenuGroup title='Help'>
+          <MenuItem>Docs</MenuItem>
+          <MenuItem>FAQ</MenuItem>
+        </MenuGroup>
+      </MenuList>
+    </Menu>
   );
 };
 

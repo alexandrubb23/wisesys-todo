@@ -12,7 +12,7 @@ const useMutateUser = () => {
   return useMutation({
     mutationFn: (user: User) => userClient.create(user),
     onSuccess: (newUser: User) => {
-      toast.success('User created', 'User created successfully');
+      toast.success('User created', 'User created successfully.');
 
       authService.saveUser(newUser);
 
@@ -20,7 +20,7 @@ const useMutateUser = () => {
     },
     onError: (error: Error) => {
       console.error(error);
-      toast.error('Error', 'Error creating user');
+      toast.error('Error', 'Error creating user.');
     },
   });
 };

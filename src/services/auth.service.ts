@@ -11,7 +11,12 @@ const getUser = (): User | null => {
   return user ? JSON.parse(user) : null;
 };
 
+const removeUser = () => {
+  localStorage.removeItem(key);
+};
+
 export default {
   getUser,
   saveUser,
+  removeUser,
 };
