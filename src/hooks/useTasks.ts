@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import ms from 'ms';
 
-import APIClient from '../assets/api-client';
+import APIClient from '../services/api-client';
 import { Task } from '../components/common/models';
 
 const apiClient = new APIClient<Task[]>('/tasks.json');
