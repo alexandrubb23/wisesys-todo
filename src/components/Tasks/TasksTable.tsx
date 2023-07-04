@@ -20,7 +20,7 @@ const TasksTable = () => {
   const [deletedTask, setDeletedTask] = useState<number[]>([]);
 
   const [sortColumn, setSortColumn] = useState<SortColumn>({
-    order: 'asc',
+    order: 'desc',
     path: 'id',
   });
 

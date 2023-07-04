@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import ms from 'ms';
 
-import APIClient from '../services/api-client';
 import { Task } from '../components/common/models';
-
-const apiClient = new APIClient<Task[]>('/tasks.json');
+import tasksClient from '../services/tasks-service';
 
 const useTasks = () => {
   return useQuery<Task[], Error>({
     queryKey: ['tasks'],
-    queryFn: apiClient.getAll,
+    queryFn: tasksClient.getAll,
     staleTime: ms('24h'),
   });
 };

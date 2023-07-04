@@ -1,20 +1,24 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5173/api',
+  baseURL: 'http://localhost:8000/',
 });
 
 class APIClient<T> {
-  constructor(private ebdpoint: string) {
-    this.ebdpoint = ebdpoint;
+  constructor(private endpoint: string) {
+    this.endpoint = endpoint;
   }
 
   getAll = (config: AxiosRequestConfig) => {
-    return axiosInstance.get<T>(this.ebdpoint, config).then(res => res.data);
+    return axiosInstance.get<T>(this.endpoint, config).then(res => res.data);
   };
 
   getOne = (id: number | string) => {
-    return axiosInstance.get<T>(`${this.ebdpoint}/${id}`).then(res => res.data);
+    return axiosInstance.get<T>(`${this.endpoint}/${id}`).then(res => res.data);
+  };
+
+  create = (data: Partial<T>) => {
+    return axiosInstance.post<T>(this.endpoint, data).then(res => res.data);
   };
 }
 
