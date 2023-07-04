@@ -2,24 +2,20 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import {
   Alert,
   AlertIcon,
-  Box,
   Button,
   HStack,
+  Spinner,
   VStack,
 } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
+import useTasks from '../../hooks/useTasks';
 import SearchInput from '../SearchInput';
 import Table from '../common/Table';
 import { Column, SortColumn, Task } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
 import EditTaskDrawer from './EditTaskDrawer';
-import ColorModeSwitch from '../ColorModeSwitch';
-
-interface TasksListProps {
-  tasks: Task[];
-}
 
 const columns: Column<Task>[] = [
   {
@@ -57,7 +53,9 @@ const columns: Column<Task>[] = [
   },
 ];
 
-const TasksTable = ({ tasks }: TasksListProps) => {
+const TasksTable = () => {
+  const { data: tasks, isLoading, error } = useTasks();
+
   const [sortColumn, setSortColumn] = useState<SortColumn>({
     order: 'asc',
     path: 'id',
@@ -82,6 +80,16 @@ const TasksTable = ({ tasks }: TasksListProps) => {
       ),
     [searchQuery, sortedTasks]
   );
+
+  if (isLoading) return <Spinner />;
+
+  if (error)
+    return (
+      <Alert status='error'>
+        <AlertIcon />
+        {error.message}
+      </Alert>
+    );
 
   return (
     <>
