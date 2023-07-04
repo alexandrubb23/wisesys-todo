@@ -33,7 +33,7 @@ const TasksTable = () => {
   const searchedTasks = useMemo(
     () =>
       sortedTasks.filter(task =>
-        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+        task.title?.toLowerCase().includes(searchQuery.toLowerCase())
       ),
     [searchQuery, sortedTasks]
   );

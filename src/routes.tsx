@@ -1,12 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import Login from './components/auth/Login';
-import SignupCard from './components/auth/SignUp';
+import ErrorPage from './components/ErrorPage';
 import Layout from './components/Layout';
 import TasksTable from './components/Tasks/TasksTable';
-import ErrorPage from './components/ErrorPage';
+import Login from './components/auth/Login';
+import SignupCard from './components/auth/SignUp';
+import PrivateRoutes from './components/PrivateRoutes';
 
 const router = createBrowserRouter([
+  {
+    element: <PrivateRoutes />,
+    children: [
+      {
+        path: 'tasks',
+        element: <TasksTable />,
+      },
+    ],
+  },
   {
     path: '/',
     element: <Layout />,
