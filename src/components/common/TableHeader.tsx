@@ -8,7 +8,7 @@ const TableHeader = <T extends TableData>({
   columns,
   sortColumn,
   onSort,
-}: Omit<TableProps<T>, 'data'>) => {
+}: Omit<TableProps<T>, 'data' | 'onSearch'>) => {
   const handleSort = (path: string) => {
     if (sortColumn.path === path) {
       sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
@@ -22,7 +22,9 @@ const TableHeader = <T extends TableData>({
 
   const renderSortIcon = (column: Column<T>) => {
     if (column.path !== sortColumn.path) return null;
+
     if (sortColumn.order === 'asc') return <ChevronUpIcon />;
+
     return <ChevronDownIcon />;
   };
 

@@ -1,12 +1,13 @@
-import { useCallback, useState } from 'react';
-import { Button, HStack } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { Button, HStack, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
+import { useCallback, useMemo, useState } from 'react';
 
 import Table from '../common/Table';
+import { Column, SortColumn } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
 import EditTaskDrawer from './EditTaskDrawer';
-import { Column, OrderDirection, SortColumn } from '../common/models';
+import SearchInput from '../SearchInput';
 
 type Task = {
   id: number;
@@ -45,7 +46,6 @@ const columns: Column<Task>[] = [
     content: (task: Task) => {
       return (
         <HStack spacing={4}>
-          <AddTaskDrawer />
           <EditTaskDrawer />
           <Button colorScheme='red' leftIcon={<DeleteIcon />}>
             Delete
@@ -62,21 +62,40 @@ const TasksTable = ({ tasks }: TasksListProps) => {
     path: 'id',
   });
 
+  const [searchQuery, setSearchQuery] = useState('');
+
   const handleSort = useCallback((sortColumn: SortColumn) => {
     setSortColumn({ ...sortColumn });
   }, []);
 
-  const { path, order } = sortColumn;
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
 
-  const sortedTasks = orderBy(tasks, [path], [order]);
+  const sortedTasks = orderBy(tasks, [sortColumn.path], [sortColumn.order]);
+
+  const searchedTasks = useMemo(
+    () =>
+      sortedTasks.filter(task =>
+        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+      ),
+    [searchQuery, sortedTasks]
+  );
 
   return (
-    <Table
-      columns={columns}
-      data={sortedTasks}
-      onSort={handleSort}
-      sortColumn={sortColumn}
-    />
+    <>
+      <VStack spacing={4} p={4} align='right'>
+        <SearchInput onSearch={handleSearch} />
+        <AddTaskDrawer />
+      </VStack>
+
+      <Table
+        columns={columns}
+        data={searchedTasks}
+        onSort={handleSort}
+        sortColumn={sortColumn}
+      />
+    </>
   );
 };
 
