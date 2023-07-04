@@ -6,11 +6,12 @@ import { Task } from '../components/common/models';
 
 const apiClient = new APIClient<Task[]>('/tasks.json');
 
-const useTasks = () =>
-  useQuery<Task[], Error>({
+const useTasks = () => {
+  return useQuery<Task[], Error>({
     queryKey: ['tasks'],
     queryFn: apiClient.getAll,
     staleTime: ms('24h'),
   });
+};
 
 export default useTasks;

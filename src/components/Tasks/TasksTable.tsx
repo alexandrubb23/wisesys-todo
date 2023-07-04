@@ -1,15 +1,15 @@
-import { DeleteIcon } from '@chakra-ui/icons';
-import { Button, HStack, Spinner, VStack } from '@chakra-ui/react';
+import { HStack, Spinner, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
 import useTasks from '../../hooks/useTasks';
 import SearchInput from '../SearchInput';
+import AlertError from '../common/AlertError';
 import Table from '../common/Table';
 import { Column, SortColumn, Task } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
 import EditTaskDrawer from './EditTaskDrawer';
-import AlertError from '../common/AlertError';
+import DeleteTaskButton from './DeleteTaskButton';
 
 const columns: Column<Task>[] = [
   {
@@ -34,13 +34,11 @@ const columns: Column<Task>[] = [
   {
     path: 'actions',
     label: 'Actions',
-    content: (task: Task) => {
+    content: (task: Task, onDelete: (task: Task) => void) => {
       return (
         <HStack spacing={4}>
           <EditTaskDrawer task={task} />
-          <Button colorScheme='red' leftIcon={<DeleteIcon />}>
-            Delete
-          </Button>
+          <DeleteTaskButton task={task} onDelete={onDelete} />
         </HStack>
       );
     },
@@ -49,6 +47,10 @@ const columns: Column<Task>[] = [
 
 const TasksTable = () => {
   const { data: tasks, isLoading, error } = useTasks();
+
+  // This is just for demonstration purposes
+  // In a real world application, we would use an API to delete the task
+  const [deletedTask, setDeletedTask] = useState<number[]>([]);
 
   const [sortColumn, setSortColumn] = useState<SortColumn>({
     order: 'asc',
@@ -65,6 +67,13 @@ const TasksTable = () => {
     setSearchQuery(query);
   }, []);
 
+  const handleDelete = (task: Task) => {
+    const index = tasks?.indexOf(task);
+    if (index === -1) return;
+
+    setDeletedTask([...deletedTask, task.id]);
+  };
+
   const sortedTasks = orderBy(tasks, [sortColumn.path], [sortColumn.order]);
 
   const searchedTasks = useMemo(
@@ -79,18 +88,23 @@ const TasksTable = () => {
 
   if (error) return <AlertError message={error.message} />;
 
+  const filteredeTasks = searchedTasks.filter(
+    task => !deletedTask.includes(task.id)
+  );
+
   return (
     <>
       <VStack spacing={4} align='right' mb={4}>
         <SearchInput onSearch={handleSearch} />
         <AddTaskDrawer />
       </VStack>
-      {searchedTasks.length === 0 ? (
+      {filteredeTasks.length === 0 ? (
         <AlertError mt={4} message='No tasks found.' status='info' />
       ) : (
         <Table
           columns={columns}
-          data={searchedTasks}
+          data={filteredeTasks}
+          onDelete={handleDelete}
           onSort={handleSort}
           sortColumn={sortColumn}
         />

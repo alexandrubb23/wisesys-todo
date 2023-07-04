@@ -3,9 +3,10 @@ import SortColumn from './sort-column.type';
 
 interface TableProps<T> {
   columns: Column<T>[];
-  sortColumn: SortColumn;
-  onSort: (sortColumn: SortColumn) => void;
   data: T[];
+  onDelete: (item: T) => void;
+  onSort: (sortColumn: SortColumn) => void;
+  sortColumn: SortColumn;
 }
 
 export default TableProps;

@@ -13,12 +13,13 @@ const Table = <T extends TableData>({
   columns,
   sortColumn,
   onSort,
+  onDelete,
   data,
 }: TableProps<T>) => {
   return (
     <ChakraTable variant='simple'>
       <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
-      <TableBody columns={columns} data={data} />
+      <TableBody columns={columns} data={data} onDelete={onDelete} />
     </ChakraTable>
   );
 };
