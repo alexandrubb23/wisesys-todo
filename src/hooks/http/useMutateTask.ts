@@ -9,27 +9,42 @@ const useMutateTask = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const addNewTask = useMutation({
-    mutationFn: (task: PartialTask) => taskClient.create(task),
-    onSuccess: (savedTask: Task) => {
-      queryClient.invalidateQueries({
-        queryKey: ['tasks'],
-      });
+  const onSuccess = (task: Task) => {
+    queryClient.invalidateQueries({
+      queryKey: ['tasks'],
+    });
 
-      toast.success('New task added', `Task ${savedTask.title} was added`);
-    },
-    onError: (error: Error, newTodo: PartialTask) => {
-      // A service can be used to log the error to a service like Sentry
-      console.error(error);
-      toast.error(`Error adding ${newTodo.title}`, error.message);
-    },
+    toast.success('Success', `Task ${task.title} was saved.`);
+  };
+
+  const onError = (error: Error, task: PartialTask) => {
+    // A service can be used to log the error to a service like Sentry
+    console.error(error);
+
+    toast.error(`Error saving ${task.title}`, error.message);
+  };
+
+  const createTask = useMutation({
+    mutationFn: (task: PartialTask) => taskClient.create(task),
+    onSuccess,
+    onError,
+  });
+
+  const editTask = useMutation({
+    mutationFn: (task: Task) => taskClient.update(task.id, task),
+    onSuccess,
+    onError,
   });
 
   const create = (task: PartialTask) => {
-    addNewTask.mutate(task);
+    createTask.mutate(task);
   };
 
-  return { create };
+  const update = (task: Task) => {
+    editTask.mutate(task);
+  };
+
+  return { create, update };
 };
 
 export default useMutateTask;

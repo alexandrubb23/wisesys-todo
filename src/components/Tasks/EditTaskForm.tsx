@@ -8,13 +8,34 @@ import {
 } from '@chakra-ui/react';
 import { useTaskDrawerContext } from './hooks';
 import { Task } from '../common/models';
+import { useMutateTask } from '../../hooks/http';
+import { useState } from 'react';
 
 interface EditTaskFormProps {
   task: Task;
 }
 
 const EditTaskForm = ({ task }: EditTaskFormProps) => {
+  const mutateTask = useMutateTask();
+
   const { firstField, onClose } = useTaskDrawerContext();
+
+  const [editedTask, setEditedTask] = useState<Task>({
+    id: task.id,
+    title: task.title,
+    createDate: task.createDate,
+    description: task.description,
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setEditedTask({ ...editedTask, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = () => {
+    mutateTask.update(editedTask);
+  };
 
   return (
     <>
@@ -23,17 +44,26 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
         <Input
           ref={firstField}
           placeholder='Task title...'
-          value={task.title}
+          value={editedTask.title}
+          onChange={handleChange}
+          name='title'
         />
 
         <FormLabel>Description</FormLabel>
-        <Textarea placeholder='Task description...' value={task.description} />
+        <Textarea
+          placeholder='Task description...'
+          value={editedTask.description}
+          onChange={handleChange}
+          name='description'
+        />
       </VStack>
       <HStack mt={4} spacing={2}>
         <Button variant='outline' onClick={onClose}>
           Cancel
         </Button>
-        <Button colorScheme='blue'>Save</Button>
+        <Button colorScheme='blue' onClick={handleFormSubmit}>
+          Save
+        </Button>
       </HStack>
     </>
   );

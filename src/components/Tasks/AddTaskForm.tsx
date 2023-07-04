@@ -13,7 +13,7 @@ import { Task } from '../common/models';
 import { useTaskDrawerContext } from './hooks';
 
 const AddTaskForm = () => {
-  const task = useMutateTask();
+  const mutateTask = useMutateTask();
 
   const { firstField, onClose } = useTaskDrawerContext();
   const [newTask, setNewTask] = useState<Partial<Task>>({
@@ -22,7 +22,7 @@ const AddTaskForm = () => {
   });
 
   const handleSubmit = () => {
-    task.create(newTask);
+    mutateTask.create(newTask);
   };
 
   const handleChange = (

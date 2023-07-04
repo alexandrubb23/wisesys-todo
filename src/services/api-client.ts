@@ -20,6 +20,13 @@ class APIClient<T> {
   create = (data: Partial<T>) => {
     return axiosInstance.post<T>(this.endpoint, data).then(res => res.data);
   };
+
+  update = (id: number, data: T) => {
+    console.log(`${this.endpoint}/${id}`);
+    return axiosInstance
+      .put<T>(`${this.endpoint}/${id}`, data)
+      .then(res => res.data);
+  };
 }
 
 export default APIClient;
