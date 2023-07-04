@@ -6,6 +6,7 @@ import TasksTable from './components/Tasks/TasksTable';
 import Login from './components/auth/Login';
 import SignupCard from './components/auth/SignUp';
 import PrivateRoutes from './components/PrivateRoutes';
+import AuthRoute from './components/AuthRoute';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,19 @@ const router = createBrowserRouter([
       {
         path: 'tasks',
         element: <TasksTable />,
+      },
+    ],
+  },
+  {
+    element: <AuthRoute />,
+    children: [
+      {
+        index: true,
+        element: <Login />,
+      },
+      {
+        path: 'signup',
+        element: <SignupCard />,
       },
     ],
   },
