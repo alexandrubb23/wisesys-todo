@@ -18,7 +18,12 @@ export interface TableProps<T> {
   data: T[];
 }
 
-const Table = <T extends { [key: string]: any; id: number }>({
+export type TableData = {
+  [key: string]: any;
+  id: number;
+};
+
+const Table = <T extends TableData>({
   columns,
   sortColumn,
   onSort,

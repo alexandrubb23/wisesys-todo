@@ -1,9 +1,9 @@
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { Th, Thead, Tr, TableColumnHeaderProps } from '@chakra-ui/react';
 
-import { Column, TableProps } from './Table';
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+import { Column, TableData, TableProps } from './Table';
 
-const TableHeader = <T extends { [key: string]: any; id: number }>({
+const TableHeader = <T extends TableData>({
   columns,
   sortColumn,
   onSort,

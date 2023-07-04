@@ -1,13 +1,14 @@
 import { Tbody, Td, Tr } from '@chakra-ui/react';
 import { get } from 'lodash';
-import { Column } from './Table';
+
+import { Column, TableData } from './Table';
 
 interface TableBodyProps<T> {
   columns: Column<T>[];
   data: T[];
 }
 
-const TableBody = <T extends { [key: string]: any; id: number }>({
+const TableBody = <T extends TableData>({
   columns,
   data,
 }: TableBodyProps<T>) => {
