@@ -1,6 +1,10 @@
-import TasksTable from './components/Tasks/TasksTable';
+import { createBrowserRouter } from 'react-router-dom';
 import Login from './components/auth/Login';
 import SignupCard from './components/auth/SignUp';
+import Layout from './components/Layout';
+import TasksTable from './components/Tasks/TasksTable';
+import ErrorPage from './components/ErrorPage';
+// import ErrorPage from './pages/ErrorPage';
 
 const tasks = [
   {
@@ -65,10 +69,26 @@ const tasks = [
   },
 ];
 
-const App = () => {
-  // return <SignupCard />;
-  // return <Login />;
-  return <TasksTable tasks={tasks} />;
-};
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Login />,
+      },
+      {
+        path: 'signup',
+        element: <SignupCard />,
+      },
+      {
+        path: 'dashboard',
+        element: <TasksTable tasks={tasks} />,
+      },
+    ],
+  },
+]);
 
-export default App;
+export default router;

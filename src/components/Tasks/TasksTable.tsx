@@ -84,10 +84,9 @@ const TasksTable = ({ tasks }: TasksListProps) => {
   );
 
   return (
-    <Box p={4}>
+    <>
       <VStack spacing={4} align='right' mb={4}>
         <SearchInput onSearch={handleSearch} />
-        <ColorModeSwitch />
         <AddTaskDrawer />
       </VStack>
       {searchedTasks.length === 0 ? (
@@ -103,7 +102,7 @@ const TasksTable = ({ tasks }: TasksListProps) => {
           sortColumn={sortColumn}
         />
       )}
-    </Box>
+    </>
   );
 };
 
