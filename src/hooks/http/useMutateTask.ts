@@ -9,19 +9,17 @@ const useMutateTask = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const onSuccess = (task: Task) => {
+  const onSuccess = () => {
     queryClient.invalidateQueries({
       queryKey: ['tasks'],
     });
 
-    toast.success('Success', `Task ${task.title} was saved.`);
+    toast.success('Success action', 'The operation was succeeded.');
   };
 
-  const onError = (error: Error, task: PartialTask) => {
-    // A service can be used to log the error to a service like Sentry
+  const onError = (error: Error) => {
     console.error(error);
-
-    toast.error(`Error saving ${task.title}`, error.message);
+    toast.error('Error action', error.message);
   };
 
   const createTask = useMutation({
@@ -36,6 +34,12 @@ const useMutateTask = () => {
     onError,
   });
 
+  const deleteTask = useMutation({
+    mutationFn: (task: Task) => taskClient.remove(task.id),
+    onSuccess,
+    onError,
+  });
+
   const create = (task: PartialTask) => {
     createTask.mutate(task);
   };
@@ -44,7 +48,11 @@ const useMutateTask = () => {
     editTask.mutate(task);
   };
 
-  return { create, update };
+  const remove = (task: Task) => {
+    deleteTask.mutate(task);
+  };
+
+  return { create, update, remove };
 };
 
 export default useMutateTask;

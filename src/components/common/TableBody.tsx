@@ -7,16 +7,14 @@ import { Column } from './models';
 interface TableBodyProps<T> {
   columns: Column<T>[];
   data: T[];
-  onDelete: (item: T) => void;
 }
 
 const TableBody = <T extends TableData>({
   columns,
   data,
-  onDelete,
 }: TableBodyProps<T>) => {
   const renderCell = (item: T, column: Column<T>) => {
-    if (column.content) return column.content({ item, onDelete });
+    if (column.content) return column.content(item);
 
     return get(item, column.path);
   };

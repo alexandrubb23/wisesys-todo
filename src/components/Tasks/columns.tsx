@@ -1,7 +1,6 @@
 import { HStack } from '@chakra-ui/react';
 
 import { Column, Task } from '../common/models';
-import Content from '../common/models/content.type';
 import DeleteTaskButton from './DeleteTaskButton';
 import EditTaskDrawer from './EditTaskDrawer';
 
@@ -28,12 +27,11 @@ const columns: Column<Task>[] = [
   {
     path: 'actions',
     label: 'Actions',
-    content: (data: Content<Task>) => {
-      const { item, onDelete } = data;
+    content: (task: Task) => {
       return (
         <HStack spacing={4}>
-          <EditTaskDrawer task={item} />
-          <DeleteTaskButton task={item} onDelete={onDelete} />
+          <EditTaskDrawer task={task} />
+          <DeleteTaskButton task={task} />
         </HStack>
       );
     },

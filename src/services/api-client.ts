@@ -27,6 +27,12 @@ class APIClient<T> {
       .put<T>(`${this.endpoint}/${id}`, data)
       .then(res => res.data);
   };
+
+  remove = (id: number) => {
+    return axiosInstance
+      .delete<T>(`${this.endpoint}/${id}`)
+      .then(res => res.data);
+  };
 }
 
 export default APIClient;

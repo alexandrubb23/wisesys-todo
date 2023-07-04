@@ -13,19 +13,22 @@ import {
 import { useRef } from 'react';
 
 import { Task } from '../common/models';
+import { useMutateTask } from '../../hooks/http';
 
 interface DeleteTaskButtonProps {
   task: Task;
-  onDelete: (task: Task) => void;
 }
 
-const DeleteTaskButton = ({ task, onDelete }: DeleteTaskButtonProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const DeleteTaskButton = ({ task }: DeleteTaskButtonProps) => {
   const cancelRef = useRef<HTMLButtonElement>(null);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const mutateTask = useMutateTask();
+
   const handleDelete = () => {
-    onDelete(task);
     onClose();
+
+    mutateTask.remove(task);
   };
 
   return (
