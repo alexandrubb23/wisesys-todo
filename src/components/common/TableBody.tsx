@@ -16,14 +16,12 @@ const TableBody = <T extends TableData>({
   onDelete,
 }: TableBodyProps<T>) => {
   const renderCell = (item: T, column: Column<T>) => {
-    if (column.content) return column.content(item, onDelete);
+    if (column.content) return column.content({ item, onDelete });
 
     return get(item, column.path);
   };
 
-  const createKey = (item: T, column: Column<T>) => {
-    return item.id + column.path;
-  };
+  const createKey = (item: T, column: Column<T>) => item.id + column.path;
 
   return (
     <Tbody>

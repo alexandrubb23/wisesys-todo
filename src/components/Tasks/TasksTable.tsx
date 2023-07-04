@@ -2,14 +2,15 @@ import { HStack, Spinner, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
-import useTasks from '../../hooks/useTasks';
-import SearchInput from '../SearchInput';
-import AlertError from '../common/AlertError';
-import Table from '../common/Table';
 import { Column, SortColumn, Task } from '../common/models';
 import AddTaskDrawer from './AddTaskDrawer';
-import EditTaskDrawer from './EditTaskDrawer';
+import AlertError from '../common/AlertError';
+import Content from '../common/models/content.type';
 import DeleteTaskButton from './DeleteTaskButton';
+import EditTaskDrawer from './EditTaskDrawer';
+import SearchInput from '../SearchInput';
+import Table from '../common/Table';
+import useTasks from '../../hooks/useTasks';
 
 const columns: Column<Task>[] = [
   {
@@ -34,11 +35,12 @@ const columns: Column<Task>[] = [
   {
     path: 'actions',
     label: 'Actions',
-    content: (task: Task, onDelete: (task: Task) => void) => {
+    content: (data: Content<Task>) => {
+      const { item, onDelete } = data;
       return (
         <HStack spacing={4}>
-          <EditTaskDrawer task={task} />
-          <DeleteTaskButton task={task} onDelete={onDelete} />
+          <EditTaskDrawer task={item} />
+          <DeleteTaskButton task={item} onDelete={onDelete} />
         </HStack>
       );
     },

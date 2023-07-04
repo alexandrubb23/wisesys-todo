@@ -1,8 +1,10 @@
+import Content from './content.type';
+
 export type Column<T> = {
   path: string;
   label: string;
   isSortable?: boolean;
-  content?: (item: T, onDelete: (item: T) => void) => JSX.Element;
+  content?: (data: Content<T>) => JSX.Element;
 };
 
 export default Column;
