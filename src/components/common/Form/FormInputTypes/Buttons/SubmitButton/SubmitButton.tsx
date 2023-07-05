@@ -14,7 +14,12 @@ const SubmitButton = ({ title, variant, ...rest }: ButtonProps) => {
   }
 
   return (
-    <Button isDisabled={!validForm} onClick={submitForm} {...rest}>
+    <Button
+      isDisabled={!validForm}
+      onClick={submitForm}
+      variant={variant}
+      {...rest}
+    >
       {title}
     </Button>
   );

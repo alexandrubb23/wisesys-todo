@@ -1,15 +1,15 @@
 import { Box, Checkbox, Stack, useColorModeValue } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import * as Yup from 'yup';
 
-import { InputTypes } from '@/components/common/Form';
 import { Form } from '@/components/common/Form/common';
+import { InputTypes } from '@/components/common/Form';
 import { useToast } from '@/hooks';
-import authService from '@/services/auth.service';
-import userService from '@/services/user.service';
 import AuthCard from './common/AuthCard';
-import HorizontalLineText from '../common/HorizontalLineText';
-import { useState } from 'react';
+import authService from '@/services/auth.service';
+import HorizontalLineText from '@/components/common/HorizontalLineText';
+import userService from '@/services/user.service';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
