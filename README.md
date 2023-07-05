@@ -59,7 +59,7 @@ npm install
 npm run dev
 ```
 
-4. Open your browser and visit http://localhost:5173 to access the app.
+4. Open your browser and visit http://localhost:3000 to access the app.
 
 ## Usage
 
