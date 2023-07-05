@@ -25,10 +25,10 @@ const initialValues: FormData = {
 };
 
 const SignUp = () => {
-  const user = useMutateUser(authService.saveUser);
+  const { isLoading, mutate } = useMutateUser(authService.saveUser);
 
   const handleSubmit = async (newUser: FormData) => {
-    user.mutate(newUser);
+    mutate(newUser);
   };
 
   return (
@@ -60,8 +60,8 @@ const SignUp = () => {
             _hover={{
               bg: 'blue.500',
             }}
-            isLoading={user.isLoading}
-            disabled={user.isLoading}
+            isLoading={isLoading}
+            disabled={isLoading}
             title='Sign up'
           />
         </Stack>
