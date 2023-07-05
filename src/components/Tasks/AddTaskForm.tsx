@@ -8,8 +8,8 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { useMutateTask } from '../../hooks/http';
-import { Task } from '../common/models';
+import { useMutateTask } from '@/hooks/mutation';
+import { Task } from '@/components/common/models';
 import { useTaskDrawerContext } from './hooks';
 
 const AddTaskForm = () => {

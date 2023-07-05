@@ -12,8 +12,8 @@ import {
 } from '@chakra-ui/react';
 import { useRef } from 'react';
 
-import { Task } from '../common/models';
-import { useMutateTask } from '../../hooks/http';
+import { Task } from '@/components/common/models';
+import { useMutateTask } from '@/hooks/mutation';
 
 interface DeleteTaskButtonProps {
   task: Task;

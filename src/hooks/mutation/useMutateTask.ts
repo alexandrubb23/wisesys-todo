@@ -1,9 +1,9 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import useToast from '../useToast';
-import { Task } from '../../components/common/models';
-import taskClient from '../../services/task.service';
-import { PartialTask } from '../../components/Tasks/models';
+import useToast from '@/hooks/useToast';
+import { Task } from '@/components/common/models';
+import taskClient from '@/services/task.service';
+import { PartialTask } from '@/components/Tasks/models';
 
 const useMutateTask = () => {
   const toast = useToast();

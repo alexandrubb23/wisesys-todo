@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { TaskDrawerContext } from '../context';
+import { TaskDrawerContext } from '@/components/Tasks/context';
 
 const useTaskDrawerContext = () => useContext(TaskDrawerContext);
 

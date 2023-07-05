@@ -9,8 +9,8 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-import authService from '../services/auth.service';
-import { useToast } from '../hooks';
+import authService from '@/services/auth.service';
+import { useToast } from '@/hooks';
 
 const UserMenu = ({ fullName }: { fullName: string }) => {
   const navigate = useNavigate();

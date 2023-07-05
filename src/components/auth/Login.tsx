@@ -10,10 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { AxiosError } from 'axios';
 
-import { useToast } from '../../hooks';
+import { useToast } from '@/hooks';
 import AuthCard from './common/AuthCard';
-import authService from '../../services/auth.service';
-import userService from '../../services/user.service';
+import authService from '@/services/auth.service';
+import userService from '@/services/user.service';
 
 const Login = () => {
   const [formData, setFormData] = useState({

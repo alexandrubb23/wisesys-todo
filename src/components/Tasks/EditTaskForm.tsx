@@ -6,10 +6,11 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react';
-import { useTaskDrawerContext } from './hooks';
-import { Task } from '../common/models';
-import { useMutateTask } from '../../hooks/http';
 import { useState } from 'react';
+
+import { useTaskDrawerContext } from './hooks';
+import { Task } from '@/components/common/models';
+import { useMutateTask } from '@/hooks/mutation';
 
 interface EditTaskFormProps {
   task: Task;

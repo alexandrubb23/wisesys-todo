@@ -2,7 +2,7 @@ import EditTaskForm from './EditTaskForm';
 import { EditIcon } from '@chakra-ui/icons';
 
 import { TaskDrawer } from './common';
-import { Task } from '../common/models';
+import { Task } from '@/components/common/models';
 
 interface EditTaskDrawerProps {
   task: Task;

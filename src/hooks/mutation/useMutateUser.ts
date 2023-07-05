@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import userClient, { User } from '../../services/user.service';
-import useToast from '../useToast';
-import authService from '../../services/auth.service';
+import authService from '@/services/auth.service';
+import userClient, { User } from '@/services/user.service';
+import useToast from '@/hooks/useToast';
 
 const useMutateUser = () => {
   const toast = useToast();

@@ -1,4 +1,4 @@
-import auth from '../services/auth.service';
+import auth from '@/services/auth.service';
 
 const useAuth = () => auth.getUser();
 

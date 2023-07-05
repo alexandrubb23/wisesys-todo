@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 
-import useAuth from '../hooks/useAuth';
+import useAuth from '@/hooks/useAuth';
 import UserAvatar from './UserAvatar';
 import UserMenu from './UserMenu';
 

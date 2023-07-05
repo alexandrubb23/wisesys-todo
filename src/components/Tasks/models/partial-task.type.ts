@@ -1,4 +1,4 @@
-import { Task } from '../../common/models';
+import { Task } from '@/components/common/models';
 
 type PartialTask = Partial<Task>;
 

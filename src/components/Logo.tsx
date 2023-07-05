@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-
 import { FcTodoList } from 'react-icons/fc';
 
 const Logo = () => {

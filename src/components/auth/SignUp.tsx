@@ -14,8 +14,8 @@ import {
 import { useState } from 'react';
 
 import AuthCard from './common/AuthCard';
-import useMutateUser from '../../hooks/mutation/useMutateUser';
-import { User } from '../../services/user.service';
+import useMutateUser from '@/hooks/mutation/useMutateUser';
+import { User } from '@/services/user.service';
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);

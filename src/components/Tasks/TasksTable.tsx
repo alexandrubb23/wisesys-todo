@@ -2,13 +2,13 @@ import { Spinner, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
-import useTasks from '../../hooks/useTasks';
-import SearchInput from '../SearchInput';
-import AlertError from '../common/AlertError';
-import Table from '../common/Table';
-import { SortColumn } from '../common/models';
+import { SortColumn } from '@/components/common/models';
 import AddTaskDrawer from './AddTaskDrawer';
+import AlertError from '@/components/common/AlertError';
 import columns from './columns';
+import SearchInput from '@/components/SearchInput';
+import Table from '@/components/common/Table';
+import useTasks from '@/hooks/useTasks';
 
 const TasksTable = () => {
   const { data: tasks, isLoading, error } = useTasks();

@@ -1,6 +1,6 @@
 import { HStack } from '@chakra-ui/react';
 
-import { Column, Task } from '../common/models';
+import { Column, Task } from '@/components/common/models';
 import DeleteTaskButton from './DeleteTaskButton';
 import EditTaskDrawer from './EditTaskDrawer';
 
