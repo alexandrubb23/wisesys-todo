@@ -4,7 +4,7 @@ import { FormInputTypeProps } from '@/components/common/Form/common/models/inter
 import { ErrorMessage, FormInputLabel } from '@/components/common/Form/common';
 import {
   InputsTypes,
-  TypeOfInputsTypes
+  TypeOfInputsTypes,
 } from '@/components/common/Form/common/models/interfaces/FormInputProps.interface';
 
 const htmlElements = ['a'];
@@ -32,7 +32,6 @@ const FormInputType = ({
     <>
       <FormInputLabel label={label} name={name} />
       <InputType
-        data-testid={`${name}-input`}
         id={name}
         name={name}
         onBlur={markFieldNameTouched}
