@@ -10,13 +10,15 @@ export type TableData = {
 };
 
 const Table = <T extends TableData>({
+  colorScheme = 'gray',
   columns,
-  sortColumn,
-  onSort,
   data,
+  onSort,
+  sortColumn,
+  variant = 'simple',
 }: TableProps<T>) => {
   return (
-    <ChakraTable variant='simple'>
+    <ChakraTable variant={variant} colorScheme={colorScheme}>
       <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
       <TableBody columns={columns} data={data} />
     </ChakraTable>
