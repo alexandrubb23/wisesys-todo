@@ -2,10 +2,11 @@ import { Box, HStack, Stack, Text } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
-import { InputTypes } from '@/components/common/Form';
 import { Form } from '@/components/common/Form/common';
-import useMutateUser from '@/hooks/mutation/useMutateUser';
+import { InputTypes } from '@/components/common/Form';
 import AuthCard from './common/AuthCard';
+import authService from '@/services/auth.service';
+import useMutateUser from '@/hooks/mutation/useMutateUser';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required().label('First Name'),
@@ -24,7 +25,7 @@ const initialValues: FormData = {
 };
 
 const SignUp = () => {
-  const user = useMutateUser();
+  const user = useMutateUser(authService.saveUser);
 
   const handleSubmit = async (newUser: FormData) => {
     user.mutate(newUser);
