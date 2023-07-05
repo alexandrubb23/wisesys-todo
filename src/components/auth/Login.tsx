@@ -1,36 +1,32 @@
-import {
-  Button,
-  Checkbox,
-  FormLabel,
-  Input,
-  Link,
-  Stack,
-} from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { AxiosError } from 'axios';
+import { Box, Checkbox, Stack, useColorModeValue } from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
+import { InputTypes } from '@/components/common/Form';
+import { Form } from '@/components/common/Form/common';
 import { useToast } from '@/hooks';
-import AuthCard from './common/AuthCard';
 import authService from '@/services/auth.service';
 import userService from '@/services/user.service';
+import AuthCard from './common/AuthCard';
+import HorizontalLineText from '../common/HorizontalLineText';
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label('Email'),
+  password: Yup.string().required().label('Password'),
+});
+
+type FormData = Yup.InferType<typeof validationSchema>;
+
+const initialValues: FormData = {
+  email: '',
+  password: '',
+};
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const navigate = useNavigate();
   const toast = useToast();
+  const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async () => {
-    const { email, password } = formData;
-
+  const handleSubmit = async ({ email, password }: FormData) => {
     try {
       const user = await userService.login(email, password);
 
@@ -43,9 +39,8 @@ const Login = () => {
 
       navigate('/tasks');
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error('Invalid email or password.', error.response?.data);
-      }
+      if (error instanceof Error)
+        toast.error('Invalid email or password.', error.message);
     }
   };
 
@@ -54,30 +49,42 @@ const Login = () => {
       heading='Sign in to your account'
       text='to enjoy all of our cool features ✌️'
     >
-      <FormLabel>Email address</FormLabel>
-      <Input type='email' name='email' onChange={handleInputChange} />
-      <FormLabel>Password</FormLabel>
-      <Input type='password' name='password' onChange={handleInputChange} />
-      <Stack spacing={10}>
-        <Stack
-          direction={{ base: 'column', sm: 'row' }}
-          align='start'
-          justify='space-between'
-        >
-          <Checkbox>Remember me</Checkbox>
-          <Link color='blue.400'>Forgot password?</Link>
+      <Form
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        formOptions={{
+          disableButtonWhenFormIsInvalid: true,
+        }}
+      >
+        <InputTypes.Text name='email' label='Email' />
+        <InputTypes.Password name='password' label='Password' />
+        <Stack spacing={10}>
+          <Stack
+            direction={{ base: 'column', sm: 'row' }}
+            align='start'
+            justify='space-between'
+          >
+            <Checkbox>Remember me</Checkbox>
+          </Stack>
+          <InputTypes.SubmitButton
+            title='Sign in'
+            bg='blue.400'
+            color='white'
+            _hover={{
+              bg: 'blue.500',
+            }}
+          />
+          <HorizontalLineText
+            text='or'
+            textBackgroundColor={useColorModeValue('white', 'gray.700')}
+            textColor='gray.500'
+          />
+          <Box textAlign='center' color='blue.400'>
+            <Link to='/signup'>Create an account</Link>
+          </Box>
         </Stack>
-        <Button
-          bg='blue.400'
-          color='white'
-          _hover={{
-            bg: 'blue.500',
-          }}
-          onClick={handleSubmit}
-        >
-          Sign in
-        </Button>
-      </Stack>
+      </Form>
     </AuthCard>
   );
 };
