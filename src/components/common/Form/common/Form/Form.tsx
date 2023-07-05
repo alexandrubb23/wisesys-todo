@@ -1,19 +1,22 @@
-import { Formik, FormikValues } from 'formik';
+import { Formik, FormikHelpers, FormikValues } from 'formik';
 
 import {
   FormOptions,
-  FormValuesSchema
+  FormValuesSchema,
 } from '@/components/common/Form/common/models/types';
 import {
   DEFAULT_FORM_OPTIONS,
-  FormOptionsProvider
+  FormOptionsProvider,
 } from '@/components/common/Form/common/Context';
 
 interface FormikFormProps<FormValues> {
   children: React.ReactNode;
   formOptions?: FormOptions;
   initialValues: FormValues;
-  onSubmit: (values: FormValues) => Promise<void>;
+  onSubmit: (
+    values: FormValues,
+    helpers: FormikHelpers<FormValues>
+  ) => Promise<void>;
   validateOnBlur?: boolean;
   validationSchema: FormValuesSchema<FormValues>;
 }
@@ -24,7 +27,7 @@ const Form = <FormValues extends FormikValues>({
   onSubmit,
   validateOnBlur = true,
   validationSchema,
-  formOptions = DEFAULT_FORM_OPTIONS
+  formOptions = DEFAULT_FORM_OPTIONS,
 }: FormikFormProps<FormValues>) => {
   return (
     <Formik

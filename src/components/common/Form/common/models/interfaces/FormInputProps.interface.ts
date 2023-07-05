@@ -1,9 +1,9 @@
-import { Input, Select } from '@chakra-ui/react';
+import { Input, Textarea } from '@chakra-ui/react';
 
 export const InputsTypes = {
-  Select,
   Text: Input,
-  Password: Input
+  Password: Input,
+  Textarea: Textarea,
 };
 
 export type TypeOfInputsTypes = keyof typeof InputsTypes;

@@ -1,4 +1,4 @@
-import { useFormikContext } from 'formik';
+import { FormikValues, useFormikContext } from 'formik';
 
 import { FormInputTypeProps } from '@/components/common/Form/common/models/interfaces';
 import { ErrorMessage, FormInputLabel } from '@/components/common/Form/common';
@@ -6,43 +6,46 @@ import {
   InputsTypes,
   TypeOfInputsTypes,
 } from '@/components/common/Form/common/models/interfaces/FormInputProps.interface';
+import React from 'react';
 
 const htmlElements = ['a'];
 
-const FormInputType = ({
-  children,
-  componentInputType,
-  label,
-  name,
-  ...rest
-}: FormInputTypeProps) => {
-  const { setFieldTouched, handleChange } = useFormikContext();
+const FormInputType = React.forwardRef<HTMLInputElement, FormInputTypeProps>(
+  (
+    { children, componentInputType, label, name, ...rest }: FormInputTypeProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    const { setFieldTouched, handleChange, values } =
+      useFormikContext<FormikValues>();
 
-  const markFieldNameTouched = (event: React.FocusEvent<HTMLElement>) => {
-    const relatedTarget = event.relatedTarget?.localName;
-    if (relatedTarget && htmlElements.includes(relatedTarget)) return;
+    const markFieldNameTouched = (event: React.FocusEvent<HTMLElement>) => {
+      const relatedTarget = event.relatedTarget?.localName;
+      if (relatedTarget && htmlElements.includes(relatedTarget)) return;
 
-    setFieldTouched(name);
-  };
+      setFieldTouched(name);
+    };
 
-  const inputType = componentInputType as TypeOfInputsTypes;
-  const InputType = InputsTypes[inputType];
+    const inputType = componentInputType as TypeOfInputsTypes;
+    const InputType = InputsTypes[inputType];
 
-  return (
-    <>
-      <FormInputLabel label={label} name={name} />
-      <InputType
-        id={name}
-        name={name}
-        onBlur={markFieldNameTouched}
-        onChange={handleChange(name)}
-        {...rest}
-      >
-        {children}
-      </InputType>
-      <ErrorMessage name={name} />
-    </>
-  );
-};
+    return (
+      <>
+        <FormInputLabel label={label} name={name} />
+        <InputType
+          id={name}
+          name={name}
+          onBlur={markFieldNameTouched}
+          onChange={handleChange(name)}
+          ref={ref}
+          value={values[name]}
+          {...rest}
+        >
+          {children}
+        </InputType>
+        <ErrorMessage name={name} />
+      </>
+    );
+  }
+);
 
 export default FormInputType;

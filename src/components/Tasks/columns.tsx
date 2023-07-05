@@ -18,6 +18,7 @@ const columns: Column<Task>[] = [
   {
     path: 'description',
     label: 'Description',
+    isTruncable: true,
   },
   {
     path: 'createDate',
