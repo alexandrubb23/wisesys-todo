@@ -14,7 +14,7 @@ import {
 import { useState } from 'react';
 
 import AuthCard from './common/AuthCard';
-import useMutateUser from '../../hooks/http/useMutateUser';
+import useMutateUser from '../../hooks/mutation/useMutateUser';
 import { User } from '../../services/user.service';
 
 export default function SignupCard() {
