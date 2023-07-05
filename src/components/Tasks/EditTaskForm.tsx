@@ -39,6 +39,8 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
       createDate: task.createDate,
     });
 
+    if (!editTask.isSuccess) return;
+
     formik.resetForm({
       values: {
         title: editedTask.title,
@@ -65,9 +67,10 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
               Cancel
             </Button>
             <InputTypes.SubmitButton
+              colorScheme='blue'
+              disabled={editTask.isLoading}
               isLoading={editTask.isLoading}
               title='Save'
-              colorScheme='blue'
             />
           </HStack>
         </VStack>

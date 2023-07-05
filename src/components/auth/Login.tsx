@@ -9,6 +9,7 @@ import authService from '@/services/auth.service';
 import userService from '@/services/user.service';
 import AuthCard from './common/AuthCard';
 import HorizontalLineText from '../common/HorizontalLineText';
+import { useState } from 'react';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -26,7 +27,11 @@ const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async ({ email, password }: FormData) => {
+    setIsLoading(true);
+
     try {
       const user = await userService.login(email, password);
 
@@ -41,6 +46,8 @@ const Login = () => {
     } catch (error) {
       if (error instanceof Error)
         toast.error('Invalid email or password.', error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -74,6 +81,8 @@ const Login = () => {
             _hover={{
               bg: 'blue.500',
             }}
+            isLoading={isLoading}
+            disabled={isLoading}
           />
           <HorizontalLineText
             text='or'

@@ -48,9 +48,10 @@ const AddTaskForm = () => {
               Cancel
             </Button>
             <InputTypes.SubmitButton
+              colorScheme='blue'
+              disabled={createTask.isLoading}
               isLoading={createTask.isLoading}
               title='Save'
-              colorScheme='blue'
             />
           </HStack>
         </VStack>

@@ -61,6 +61,7 @@ export default function SignupCard() {
               bg: 'blue.500',
             }}
             isLoading={user.isLoading}
+            disabled={user.isLoading}
             title='Sign up'
           />
         </Stack>
