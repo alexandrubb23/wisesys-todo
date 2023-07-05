@@ -4,6 +4,7 @@ import useToast from '@/hooks/useToast';
 import { Task } from '@/components/common/models';
 import taskClient from '@/services/task.service';
 import { PartialTask } from '@/components/Tasks/models';
+import { TASKS_QUERY_KEY } from '@/hooks/useTasks';
 
 const useMutateTask = () => {
   const toast = useToast();
@@ -11,7 +12,7 @@ const useMutateTask = () => {
 
   const onSuccess = () => {
     queryClient.invalidateQueries({
-      queryKey: ['tasks'],
+      queryKey: [TASKS_QUERY_KEY],
     });
 
     toast.success('Success action', 'The operation was succeeded.');

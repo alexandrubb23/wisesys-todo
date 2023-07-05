@@ -4,9 +4,11 @@ import ms from 'ms';
 import { Task } from '@/components/common/models';
 import tasksClient from '@/services/tasks.service';
 
+export const TASKS_QUERY_KEY = 'tasks';
+
 const useTasks = () =>
   useQuery<Task[], Error>({
-    queryKey: ['tasks'],
+    queryKey: [TASKS_QUERY_KEY],
     queryFn: tasksClient.getAll,
     staleTime: ms('24h'),
   });
