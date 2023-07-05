@@ -14,6 +14,7 @@ import { useRef } from 'react';
 
 import { Task } from '@/components/common/models';
 import { useMutateTask } from '@/hooks/mutation';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 interface DeleteTaskButtonProps {
   task: Task;
@@ -37,6 +38,7 @@ const DeleteTaskButton = ({ task }: DeleteTaskButtonProps) => {
         colorScheme='red'
         onClick={onOpen}
         isLoading={deleteTask.isLoading}
+        leftIcon={<DeleteIcon />}
       >
         Delete
       </Button>
