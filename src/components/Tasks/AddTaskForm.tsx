@@ -22,7 +22,7 @@ const initialValues: FormData = {
 
 const AddTaskForm = () => {
   const { createTask } = useMutateTask();
-  const { firstField, onClose } = useTaskDrawerContext();
+  const { onClose } = useTaskDrawerContext();
 
   const handleSubmit = async (
     newTask: Pick<Task, 'title' | 'description'>,
@@ -41,7 +41,7 @@ const AddTaskForm = () => {
         onSubmit={handleSubmit}
       >
         <VStack align='left' spacing={4} alignContent='left'>
-          <InputTypes.Text name='title' label='Title' ref={firstField} />
+          <InputTypes.Text name='title' label='Title' />
           <InputTypes.TextArea name='description' label='Description' />
           <HStack mt={4} spacing={2}>
             <Button variant='outline' onClick={onClose}>

@@ -6,6 +6,7 @@ import { InputTypes } from '@/components/common/Form';
 import { Task } from '@/components/common/models';
 import { useMutateTask } from '@/hooks/mutation';
 import { useTaskDrawerContext } from './hooks';
+import { FormikHelpers } from 'formik';
 
 interface EditTaskFormProps {
   task: Task;
@@ -29,12 +30,20 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
   const { firstField, onClose } = useTaskDrawerContext();
 
   const handleSubmit = async (
-    editedTask: Pick<Task, 'title' | 'description'>
+    editedTask: Pick<Task, 'title' | 'description'>,
+    formik: FormikHelpers<FormData>
   ) => {
     editTask.mutate({
       ...editedTask,
       id: task.id,
       createDate: task.createDate,
+    });
+
+    formik.resetForm({
+      values: {
+        title: editedTask.title,
+        description: editedTask.description,
+      },
     });
   };
 
