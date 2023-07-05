@@ -11,10 +11,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useRef } from 'react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 import { Task } from '@/components/common/models';
 import { useMutateTask } from '@/hooks/mutation';
-import { DeleteIcon } from '@chakra-ui/icons';
 
 interface DeleteTaskButtonProps {
   task: Task;

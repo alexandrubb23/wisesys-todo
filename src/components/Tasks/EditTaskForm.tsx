@@ -39,8 +39,6 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
       createDate: task.createDate,
     });
 
-    if (!editTask.isSuccess) return;
-
     formik.resetForm({
       values: {
         title: editedTask.title,
