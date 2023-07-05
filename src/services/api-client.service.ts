@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 export const axiosInstance = axios.create({
+  // TODO: Add to the .env file
+  // Keep it simple for now
   baseURL: 'http://localhost:8000/',
 });
 
