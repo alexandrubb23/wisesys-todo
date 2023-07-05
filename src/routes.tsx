@@ -1,12 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import AuthRoute from './components/AuthRoute';
 import ErrorPage from './components/ErrorPage';
 import Layout from './components/Layout';
-import TasksTable from './components/Tasks/TasksTable';
-import Login from './components/auth/Login';
-import SignupCard from './components/auth/SignUp';
 import PrivateRoutes from './components/PrivateRoutes';
-import AuthRoute from './components/AuthRoute';
+import { LoginPage, RegisterPage, TasksPage } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -14,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'tasks',
-        element: <TasksTable />,
+        element: <TasksPage />,
       },
     ],
   },
@@ -23,11 +21,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Login />,
+        element: <LoginPage />,
       },
       {
         path: 'signup',
-        element: <SignupCard />,
+        element: <RegisterPage />,
       },
     ],
   },
@@ -38,15 +36,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Login />,
+        element: <LoginPage />,
       },
       {
         path: 'signup',
-        element: <SignupCard />,
+        element: <RegisterPage />,
       },
       {
         path: 'tasks',
-        element: <TasksTable />,
+        element: <TasksPage />,
       },
     ],
   },

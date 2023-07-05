@@ -1,4 +1,4 @@
-import { Tbody, Td, Tr, Text } from '@chakra-ui/react';
+import { Tbody, Td, Tr } from '@chakra-ui/react';
 import { get } from 'lodash';
 
 import { TableData } from './Table';

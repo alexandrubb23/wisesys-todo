@@ -26,7 +26,6 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
   };
 
   const { editTask } = useMutateTask();
-
   const { firstField, onClose } = useTaskDrawerContext();
 
   const handleSubmit = async (
