@@ -67,7 +67,7 @@ const Login = () => {
         <InputTypes.Text
           label='Email'
           name='email'
-          placeholder='Your email address.'
+          placeholder='Your email address...'
         />
         <InputTypes.Password
           name='password'
