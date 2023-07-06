@@ -1,9 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import AuthRoute from './components/AuthRoute';
+import { AuthRoutes, PrivateRoutes } from './components/Routes';
 import ErrorPage from './components/ErrorPage';
 import Layout from './components/Layout';
-import PrivateRoutes from './components/PrivateRoutes';
 import { LoginPage, RegisterPage, TasksPage } from './pages';
 
 const router = createBrowserRouter([
@@ -17,7 +16,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <AuthRoute />,
+    element: <AuthRoutes />,
     children: [
       {
         index: true,
