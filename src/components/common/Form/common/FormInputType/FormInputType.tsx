@@ -1,4 +1,5 @@
 import { FormikValues, useFormikContext } from 'formik';
+import React from 'react';
 
 import { FormInputTypeProps } from '@/components/common/Form/common/models/interfaces';
 import { ErrorMessage, FormInputLabel } from '@/components/common/Form/common';
@@ -6,9 +7,8 @@ import {
   InputsTypes,
   TypeOfInputsTypes,
 } from '@/components/common/Form/common/models/interfaces/FormInputProps.interface';
-import React from 'react';
 
-const htmlElements = ['a'];
+const htmlElements = ['a', 'button'];
 
 const FormInputType = React.forwardRef<HTMLInputElement, FormInputTypeProps>(
   (
