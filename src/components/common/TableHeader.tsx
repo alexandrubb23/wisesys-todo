@@ -4,7 +4,7 @@ import { Th, Thead, Tr, TableColumnHeaderProps } from '@chakra-ui/react';
 import { TableData } from './Table';
 import { Column, TableProps } from './models';
 
-const TableHeader = <T extends TableData>({
+const TableHeader = <T extends TableData<T>>({
   columns,
   sortColumn,
   onSort,

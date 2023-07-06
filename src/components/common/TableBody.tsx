@@ -11,7 +11,7 @@ interface TableBodyProps<T> {
 
 const TRUNCATE_LENGTH = 20;
 
-const TableBody = <T extends TableData>({
+const TableBody = <T extends TableData<T>>({
   columns,
   data,
 }: TableBodyProps<T>) => {
@@ -28,7 +28,8 @@ const TableBody = <T extends TableData>({
     return text;
   };
 
-  const createKey = (item: T, column: Column<T>) => item.id + column.path;
+  const createKey = (item: TableData<T>, column: Column<T>) =>
+    item.id + column.path;
 
   return (
     <Tbody>

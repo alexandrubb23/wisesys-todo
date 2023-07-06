@@ -4,12 +4,15 @@ import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import { TableProps } from './models';
 
-export type TableData = {
-  [key: string]: any;
-  id: number;
+type FieldData<TFields> = {
+  [K in keyof TFields]: TFields[K];
 };
 
-const Table = <T extends TableData>({
+export type TableData<TFields> = {
+  id: number | string;
+} & FieldData<TFields>;
+
+const Table = <T extends TableData<T>>({
   colorScheme = 'gray',
   columns,
   data,
