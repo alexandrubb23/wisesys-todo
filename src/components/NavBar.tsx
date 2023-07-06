@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 
+import { UserAccount } from './User';
 import ColorModeSwitch from './ColorModeSwitch';
 import Logo from './Logo';
-import UserAccount from './UserAccount';
 
 const NavBar = () => {
   return (
