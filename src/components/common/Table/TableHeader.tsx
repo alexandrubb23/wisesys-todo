@@ -2,7 +2,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { Th, Thead, Tr, TableColumnHeaderProps } from '@chakra-ui/react';
 
 import { TableData } from './Table';
-import { Column, TableProps } from './models';
+import { Column, TableProps } from '@/components/common/models';
 
 const TableHeader = <TFields extends TableData<TFields>>({
   columns,

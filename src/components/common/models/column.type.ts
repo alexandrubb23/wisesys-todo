@@ -1,4 +1,4 @@
-import { TableData } from '@/components/common/Table';
+import { TableData } from '@/components/common/Table/Table';
 
 export type Column<TFields> = {
   path: string;

@@ -2,7 +2,7 @@ import { Table as ChakraTable } from '@chakra-ui/react';
 
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
-import { TableProps } from './models';
+import { TableProps } from '@/components/common/models';
 
 type FieldData<TFields> = {
   [K in keyof TFields]: TFields[K];

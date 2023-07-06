@@ -2,7 +2,7 @@ import { Tbody, Td, Tr } from '@chakra-ui/react';
 import { get } from 'lodash';
 
 import { TableData } from './Table';
-import { Column } from './models';
+import { Column } from '@/components/common/models';
 
 interface TableBodyProps<TFields> {
   columns: Column<TFields>[];
