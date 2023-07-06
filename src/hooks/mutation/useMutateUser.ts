@@ -1,8 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import userClient, { User } from '@/services/user.service';
 import useToast from '@/hooks/useToast';
+import ApiError from '@/services/api-error.service';
+import userClient, { User } from '@/services/user.service';
 
 const useMutateUser = (saveUser: (user: User) => void) => {
   const toast = useToast();
@@ -17,9 +18,10 @@ const useMutateUser = (saveUser: (user: User) => void) => {
 
       navigate('/tasks');
     },
-    onError: (error: Error) => {
+    onError: (error: ApiError) => {
       console.error(error);
-      toast.error('Error', 'Error creating user.');
+
+      toast.error('Error', error.response?.data as string);
     },
   });
 };

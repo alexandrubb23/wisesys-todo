@@ -67,8 +67,8 @@ const SignUp = () => {
         </Stack>
         <Stack pt={6}>
           <Text align='center'>
-            Already a user?{' '}
-            <Box as='span' color='blue.400'>
+            Already a user?
+            <Box as='span' color='blue.400' ml={1}>
               <Link to='/'>Login</Link>
             </Box>
           </Text>
