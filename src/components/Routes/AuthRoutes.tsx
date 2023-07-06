@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
+import { Layout } from '@/components/Layout';
 import useAuth from '@/hooks/useAuth';
-import Layout from '../Layout';
 
 const AuthRoute = () => {
   const user = useAuth();

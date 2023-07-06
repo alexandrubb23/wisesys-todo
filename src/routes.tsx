@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AuthRoutes, PrivateRoutes } from './components/Routes';
-import ErrorPage from './components/ErrorPage';
-import Layout from './components/Layout';
+import { Layout } from './components/Layout';
 import { LoginPage, RegisterPage, TasksPage } from './pages';
+import ErrorPage from './components/ErrorPage';
 
 const router = createBrowserRouter([
   {
