@@ -15,7 +15,7 @@ interface AuthCardProps {
 
 const AuthCard = ({ children, heading, text }: AuthCardProps) => {
   return (
-    <Flex minH='100vh' align='center' justify='center'>
+    <Flex minH='calc(100vh - 110px)' align='center' justify='center'>
       <Stack spacing={8} mx='auto' maxW='lg' py={12} px={6}>
         <Stack align='center'>
           <Heading fontSize='4xl' textAlign='center'>
