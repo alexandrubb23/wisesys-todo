@@ -12,14 +12,14 @@ export type TableData<TFields> = {
   id: number | string;
 } & FieldData<TFields>;
 
-const Table = <T extends TableData<T>>({
+const Table = <TFields extends TableData<TFields>>({
   colorScheme = 'gray',
   columns,
   data,
   onSort,
   sortColumn,
   variant = 'simple',
-}: TableProps<T>) => {
+}: TableProps<TFields>) => {
   return (
     <ChakraTable variant={variant} colorScheme={colorScheme}>
       <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />

@@ -4,18 +4,18 @@ import { get } from 'lodash';
 import { TableData } from './Table';
 import { Column } from './models';
 
-interface TableBodyProps<T> {
-  columns: Column<T>[];
-  data: T[];
+interface TableBodyProps<TFields> {
+  columns: Column<TFields>[];
+  data: TableData<TFields>[];
 }
 
 const TRUNCATE_LENGTH = 20;
 
-const TableBody = <T extends TableData<T>>({
+const TableBody = <TFields extends TableData<TFields>>({
   columns,
   data,
-}: TableBodyProps<T>) => {
-  const renderCell = (item: T, column: Column<T>) => {
+}: TableBodyProps<TFields>) => {
+  const renderCell = (item: TableData<TFields>, column: Column<TFields>) => {
     if (column.content) return column.content(item);
 
     let text: string = get(item, column.path);
@@ -28,7 +28,7 @@ const TableBody = <T extends TableData<T>>({
     return text;
   };
 
-  const createKey = (item: TableData<T>, column: Column<T>) =>
+  const createKey = (item: TableData<TFields>, column: Column<TFields>) =>
     item.id + column.path;
 
   return (

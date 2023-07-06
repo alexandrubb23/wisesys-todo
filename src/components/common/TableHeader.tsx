@@ -4,14 +4,16 @@ import { Th, Thead, Tr, TableColumnHeaderProps } from '@chakra-ui/react';
 import { TableData } from './Table';
 import { Column, TableProps } from './models';
 
-const TableHeader = <T extends TableData<T>>({
+const TableHeader = <TFields extends TableData<TFields>>({
   columns,
   sortColumn,
   onSort,
-}: Pick<TableProps<T>, 'columns' | 'sortColumn' | 'onSort'>) => {
+}: Pick<TableProps<TFields>, 'columns' | 'sortColumn' | 'onSort'>) => {
+  const ascOrder = sortColumn.order === 'asc';
+
   const handleSort = (path: string) => {
     if (sortColumn.path === path) {
-      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
+      sortColumn.order = ascOrder ? 'desc' : 'asc';
     } else {
       sortColumn.path = path;
       sortColumn.order = 'asc';
@@ -20,12 +22,9 @@ const TableHeader = <T extends TableData<T>>({
     onSort(sortColumn);
   };
 
-  const renderSortIcon = (column: Column<T>) => {
+  const renderSortIcon = (column: Column<TFields>) => {
     if (column.path !== sortColumn.path) return null;
-
-    if (sortColumn.order === 'asc') return <ChevronUpIcon />;
-
-    return <ChevronDownIcon />;
+    return ascOrder ? <ChevronUpIcon /> : <ChevronDownIcon />;
   };
 
   return (
