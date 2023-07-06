@@ -3,17 +3,17 @@ import { Tooltip } from '@chakra-ui/react';
 import { Column } from '../models';
 import { TableData } from './Table';
 
-interface SortableColumnTooltipProps<TFields extends TableData<TFields>> {
+interface TableColumnTooltipProps<TFields extends TableData<TFields>> {
   column: Column<TFields>;
   label: string;
   toolTipColumn: string;
 }
 
-const SortableColumnTooltip = <TFields extends TableData<TFields>>({
+const TableColumnTooltip = <TFields extends TableData<TFields>>({
   column,
   label,
   toolTipColumn,
-}: SortableColumnTooltipProps<TFields>) => {
+}: TableColumnTooltipProps<TFields>) => {
   if (!column?.isSortable) return <>{column.label}</>;
 
   return (
@@ -29,4 +29,4 @@ const SortableColumnTooltip = <TFields extends TableData<TFields>>({
   );
 };
 
-export default SortableColumnTooltip;
+export default TableColumnTooltip;
