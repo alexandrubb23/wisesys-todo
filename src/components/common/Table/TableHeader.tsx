@@ -1,14 +1,18 @@
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import { Th, Thead, Tr, TableColumnHeaderProps } from '@chakra-ui/react';
+import { TableColumnHeaderProps, Th, Thead, Tr } from '@chakra-ui/react';
+import { useState } from 'react';
 
+import { TableProps } from '@/components/common/models';
+import TableColumnSortIcon from './TableColumnSortIcon';
+import TableColumnTooltip from './TableColumnTooltip';
 import { TableData } from './Table';
-import { Column, TableProps } from '@/components/common/models';
 
 const TableHeader = <TFields extends TableData<TFields>>({
   columns,
   sortColumn,
   onSort,
 }: Pick<TableProps<TFields>, 'columns' | 'sortColumn' | 'onSort'>) => {
+  const [toolTipColumn, setToolTipColumn] = useState('');
+
   const ascOrder = sortColumn.order === 'asc';
 
   const handleSort = (path: string) => {
@@ -22,11 +26,6 @@ const TableHeader = <TFields extends TableData<TFields>>({
     onSort(sortColumn);
   };
 
-  const renderSortIcon = (column: Column<TFields>) => {
-    if (column.path !== sortColumn.path) return null;
-    return ascOrder ? <ChevronUpIcon /> : <ChevronDownIcon />;
-  };
-
   return (
     <Thead>
       <Tr>
@@ -38,8 +37,20 @@ const TableHeader = <TFields extends TableData<TFields>>({
           }
 
           return (
-            <Th key={column.path} {...props}>
-              {column.label} {renderSortIcon(column)}
+            <Th
+              {...props}
+              key={column.path}
+              onMouseEnter={() => setToolTipColumn(column.path)}
+              onMouseLeave={() => setToolTipColumn('')}
+            >
+              <TableColumnTooltip
+                column={column}
+                label={`Sort by ${column.label} ${
+                  ascOrder ? 'descending' : 'ascending'
+                }`}
+                toolTipColumn={toolTipColumn}
+              />
+              <TableColumnSortIcon column={column} sortColumn={sortColumn} />
             </Th>
           );
         })}
