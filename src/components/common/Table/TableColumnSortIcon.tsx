@@ -1,6 +1,6 @@
 import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
-import { Column, SortColumn } from '../models';
+import { Column, SortColumn } from '@/components/common/models';
 import { TableData } from './Table';
 
 interface SortColumnIconProps<TFields extends TableData<TFields>> {

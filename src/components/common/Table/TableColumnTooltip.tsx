@@ -1,6 +1,6 @@
 import { Tooltip } from '@chakra-ui/react';
 
-import { Column } from '../models';
+import { Column } from '@/components/common/models';
 import { TableData } from './Table';
 
 interface TableColumnTooltipProps<TFields extends TableData<TFields>> {
