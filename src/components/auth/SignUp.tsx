@@ -43,14 +43,30 @@ const SignUp = () => {
       <AuthCard heading='Sign up' text='to enjoy all of our cool features ✌️'>
         <HStack alignItems='baseline'>
           <Box>
-            <InputTypes.Text name='firstName' label='First Name' />
+            <InputTypes.Text
+              name='firstName'
+              label='First Name'
+              placeholder='Your first name...'
+            />
           </Box>
           <Box>
-            <InputTypes.Text name='lastName' label='Last Name' />
+            <InputTypes.Text
+              name='lastName'
+              label='Last Name'
+              placeholder='Your last name...'
+            />
           </Box>
         </HStack>
-        <InputTypes.Text name='email' label='Email' />
-        <InputTypes.Password name='password' label='Password' />
+        <InputTypes.Text
+          name='email'
+          label='Email'
+          placeholder='Your email...'
+        />
+        <InputTypes.Password
+          name='password'
+          label='Password'
+          placeholder='Your password...'
+        />
         <Stack spacing={10} pt={2}>
           <InputTypes.SubmitButton
             loadingText='Submitting'

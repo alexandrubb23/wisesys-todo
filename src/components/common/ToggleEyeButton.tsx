@@ -25,6 +25,7 @@ const ToggleEyeButton = ({
       onClick={onToggle}
       padding={0}
       height={0}
+      tabIndex={-1}
       {...rest}
     >
       {title}

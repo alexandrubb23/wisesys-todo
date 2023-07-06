@@ -64,8 +64,16 @@ const Login = () => {
           disableButtonWhenFormIsInvalid: true,
         }}
       >
-        <InputTypes.Text name='email' label='Email' />
-        <InputTypes.Password name='password' label='Password' />
+        <InputTypes.Text
+          label='Email'
+          name='email'
+          placeholder='Your email address.'
+        />
+        <InputTypes.Password
+          name='password'
+          label='Password'
+          placeholder='Your password...'
+        />
         <Stack spacing={10}>
           <Stack
             direction={{ base: 'column', sm: 'row' }}
