@@ -6,13 +6,13 @@ import SearchInput from '@/components/SearchInput';
 import AlertError from '@/components/common/AlertError';
 import { Table } from '@/components/common/Table';
 import useTasks from '@/hooks/useTasks';
-import useTableStore from '@/store/table-store';
+import useTableQueryStore from '@/store/table-store';
 import useTasksQueryStore from '@/store/tasks-store';
 import AddTaskDrawer from './AddTaskDrawer';
 import columns from './columns';
 
 const TasksTable = () => {
-  const sortColumn = useTableStore(s => s.tableQuery.sortColumn);
+  const sortColumn = useTableQueryStore(s => s.tableQuery.sortColumn);
   const searchQueryText = useTasksQueryStore(s => s.tasksQuery.searchText);
 
   const { data: tasks, isLoading, error } = useTasks();

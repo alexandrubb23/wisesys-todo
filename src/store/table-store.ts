@@ -35,7 +35,7 @@ const setQueryMember =
     };
   };
 
-const useTableStore = create<TableQueryStore>(set => ({
+const useTableQueryStore = create<TableQueryStore>(set => ({
   tableQuery: {
     sortColumn: {
       order: 'desc',
@@ -51,4 +51,4 @@ const useTableStore = create<TableQueryStore>(set => ({
   setTableData: (data: TableData<unknown>[]) => set(setQueryMember({ data })),
 }));
 
-export default useTableStore;
+export default useTableQueryStore;

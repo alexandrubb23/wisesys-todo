@@ -3,7 +3,7 @@ import { Table as ChakraTable } from '@chakra-ui/react';
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import { TableProps } from '@/components/common/models';
-import useTableStore from '@/store/table-store';
+import useTableQueryStore from '@/store/table-store';
 import { useCallback, useEffect } from 'react';
 
 type FieldData<TFields> = {
@@ -20,7 +20,7 @@ const Table = <TFields extends TableData<TFields>>({
   data,
   variant = 'simple',
 }: TableProps<TFields>) => {
-  const { setTableColumns, setTableData } = useTableStore();
+  const { setTableColumns, setTableData } = useTableQueryStore();
 
   const setData = useCallback(() => {
     setTableColumns(columns);

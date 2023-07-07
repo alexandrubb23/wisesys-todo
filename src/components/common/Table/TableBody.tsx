@@ -3,13 +3,13 @@ import { get } from 'lodash';
 
 import { TableData } from './Table';
 import { Column } from '@/components/common/models';
-import useTableStore from '@/store/table-store';
+import useTableQueryStore from '@/store/table-store';
 
 const TRUNCATE_LENGTH = 20;
 
 const TableBody = <T extends TableData<T>>() => {
-  const columns = useTableStore(s => s.tableQuery.columns) as Column<T>[];
-  const data = useTableStore(s => s.tableQuery.data) as TableData<T>[];
+  const columns = useTableQueryStore(s => s.tableQuery.columns) as Column<T>[];
+  const data = useTableQueryStore(s => s.tableQuery.data) as TableData<T>[];
 
   const renderCell = (item: TableData<T>, column: Column<T>) => {
     if (column.content) return column.content(item);
