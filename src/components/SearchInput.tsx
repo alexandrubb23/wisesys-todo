@@ -1,3 +1,4 @@
+import useTasksQueryStore from '@/store/tasks-store';
 import {
   IconButton,
   Input,
@@ -12,21 +13,22 @@ import { MdClear } from 'react-icons/md';
 
 interface SearchInputProps {
   wait?: number;
-  onSearch: (query: string) => void;
 }
 
-const SearchInput = ({ onSearch, wait = 500 }: SearchInputProps) => {
+const SearchInput = ({ wait = 500 }: SearchInputProps) => {
+  const setSearchText = useTasksQueryStore(s => s.setSearchText);
+
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = debounce(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      onSearch(event.target.value);
+      setSearchText(event.target.value);
     },
     wait
   );
 
   const clearSearch = () => {
-    onSearch('');
+    setSearchText('');
     if (searchInputRef.current) searchInputRef.current.value = '';
   };
 

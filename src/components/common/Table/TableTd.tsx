@@ -2,7 +2,7 @@ import { TableColumnHeaderProps, Th } from '@chakra-ui/react';
 import { useCallback } from 'react';
 
 import useTableStore from '@/store/table-store';
-import { Column } from '../models';
+import { Column } from '@/components/common/models';
 import { TableData } from './Table';
 import TableColumnSortIcon from './TableColumnSortIcon';
 import TableColumnTooltip from './TableColumnTooltip';
