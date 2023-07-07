@@ -2,27 +2,20 @@ import { Spinner, VStack } from '@chakra-ui/react';
 import { orderBy } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 
-import { SortColumn } from '@/components/common/models';
-import { Table } from '@/components/common/Table';
-import AddTaskDrawer from './AddTaskDrawer';
-import AlertError from '@/components/common/AlertError';
-import columns from './columns';
 import SearchInput from '@/components/SearchInput';
+import AlertError from '@/components/common/AlertError';
+import { Table } from '@/components/common/Table';
 import useTasks from '@/hooks/useTasks';
+import useTableStore from '@/store/table-store';
+import AddTaskDrawer from './AddTaskDrawer';
+import columns from './columns';
 
 const TasksTable = () => {
+  const sortColumn = useTableStore(s => s.tableQuery.sortColumn);
+
   const { data: tasks, isLoading, error } = useTasks();
 
-  const [sortColumn, setSortColumn] = useState<SortColumn>({
-    order: 'desc',
-    path: 'id',
-  });
-
   const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSort = useCallback((sortColumn: SortColumn) => {
-    setSortColumn({ ...sortColumn });
-  }, []);
 
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
@@ -51,12 +44,7 @@ const TasksTable = () => {
       {searchedTasks.length === 0 ? (
         <AlertError mt={4} message='No tasks found.' status='info' />
       ) : (
-        <Table
-          columns={columns}
-          data={searchedTasks}
-          onSort={handleSort}
-          sortColumn={sortColumn}
-        />
+        <Table columns={columns} data={searchedTasks} />
       )}
     </>
   );

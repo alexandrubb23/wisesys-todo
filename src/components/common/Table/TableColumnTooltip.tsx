@@ -2,18 +2,19 @@ import { Tooltip } from '@chakra-ui/react';
 
 import { Column } from '@/components/common/models';
 import { TableData } from './Table';
+import useTableStore from '@/store/table-store';
 
-interface TableColumnTooltipProps<TFields extends TableData<TFields>> {
-  column: Column<TFields>;
+interface TableColumnTooltipProps<T extends TableData<T>> {
+  column: Column<T>;
   label: string;
-  toolTipColumn: string;
 }
 
-const TableColumnTooltip = <TFields extends TableData<TFields>>({
+const TableColumnTooltip = <T extends TableData<T>>({
   column,
   label,
-  toolTipColumn,
-}: TableColumnTooltipProps<TFields>) => {
+}: TableColumnTooltipProps<T>) => {
+  const toolTipColumn = useTableStore(s => s.tableQuery.toolTipColumn);
+
   if (!column?.isSortable) return <>{column.label}</>;
 
   return (

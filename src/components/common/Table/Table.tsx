@@ -3,6 +3,8 @@ import { Table as ChakraTable } from '@chakra-ui/react';
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import { TableProps } from '@/components/common/models';
+import useTableStore from '@/store/table-store';
+import { useEffect } from 'react';
 
 type FieldData<TFields> = {
   [K in keyof TFields]: TFields[K];
@@ -16,14 +18,19 @@ const Table = <TFields extends TableData<TFields>>({
   colorScheme = 'gray',
   columns,
   data,
-  onSort,
-  sortColumn,
   variant = 'simple',
 }: TableProps<TFields>) => {
+  const { setTableColumns, setTableData } = useTableStore();
+
+  useEffect(() => {
+    setTableColumns(columns);
+    setTableData(data);
+  }, [columns, data, setTableColumns, setTableData]);
+
   return (
     <ChakraTable variant={variant} colorScheme={colorScheme}>
-      <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
-      <TableBody columns={columns} data={data} />
+      <TableHeader />
+      <TableBody />
     </ChakraTable>
   );
 };

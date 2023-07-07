@@ -1,23 +1,20 @@
 import { TableColumnHeaderProps, Th } from '@chakra-ui/react';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 
-import { Column, SortColumn } from '../models';
+import useTableStore from '@/store/table-store';
+import { Column } from '../models';
 import { TableData } from './Table';
 import TableColumnSortIcon from './TableColumnSortIcon';
 import TableColumnTooltip from './TableColumnTooltip';
 
-interface TableTdProps<TFields extends TableData<TFields>> {
-  column: Column<TFields>;
-  onSort: (sortColumn: SortColumn) => void;
-  sortColumn: SortColumn;
+interface TableTdProps<T extends TableData<T>> {
+  column: Column<T>;
 }
 
-const TableTd = <TFields extends TableData<TFields>>({
-  column,
-  onSort,
-  sortColumn,
-}: TableTdProps<TFields>) => {
-  const [toolTipColumn, setToolTipColumn] = useState('');
+const TableTd = <T extends TableData<T>>({ column }: TableTdProps<T>) => {
+  const setSortColumn = useTableStore(s => s.setSortColumn);
+  const setToolTipColumn = useTableStore(s => s.setToolTipColumn);
+  const sortColumn = useTableStore(s => s.tableQuery.sortColumn);
 
   const isAscendingOrder = sortColumn.order === 'asc';
 
@@ -30,9 +27,9 @@ const TableTd = <TFields extends TableData<TFields>>({
         sortColumn.order = 'asc';
       }
 
-      onSort(sortColumn);
+      setSortColumn({ ...sortColumn });
     },
-    [onSort, sortColumn, isAscendingOrder]
+    [sortColumn, setSortColumn, isAscendingOrder]
   );
 
   const props: TableColumnHeaderProps = {};
@@ -52,7 +49,6 @@ const TableTd = <TFields extends TableData<TFields>>({
         label={`Sort by ${column.label} ${
           isAscendingOrder ? 'descending' : 'ascending'
         }`}
-        toolTipColumn={toolTipColumn}
       />
       <TableColumnSortIcon column={column} sortColumn={sortColumn} />
     </Th>
