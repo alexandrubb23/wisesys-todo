@@ -51,4 +51,7 @@ const useTableQueryStore = create<TableQueryStore>(set => ({
   setTableData: (data: TableData<unknown>[]) => set(setQueryMember({ data })),
 }));
 
+export const useTableSortColumn = () =>
+  useTableQueryStore(s => s.tableQuery.sortColumn);
+
 export default useTableQueryStore;
