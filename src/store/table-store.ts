@@ -17,6 +17,24 @@ interface TableQueryStore {
   setTableData: (data: TableData<unknown>[]) => void;
 }
 
+const setQueryMember =
+  (data: Partial<TableQuery>) => (store: TableQueryStore) => {
+    const tableQuery: Partial<TableQuery> = Object.entries(data).reduce(
+      (acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      },
+      {} as Record<string, Partial<TableQuery[keyof TableQuery]>>
+    );
+
+    return {
+      tableQuery: {
+        ...store.tableQuery,
+        ...tableQuery,
+      },
+    };
+  };
+
 const useTableStore = create<TableQueryStore>(set => ({
   tableQuery: {
     sortColumn: {
@@ -26,33 +44,11 @@ const useTableStore = create<TableQueryStore>(set => ({
     toolTipColumn: '',
   },
   setTableSortColumn: (sortColumn: SortColumn) =>
-    set(store => ({
-      tableQuery: {
-        ...store.tableQuery,
-        sortColumn,
-      },
-    })),
+    set(setQueryMember({ sortColumn })),
   setTableToolTipColumn: (toolTipColumn: string) =>
-    set(store => ({
-      tableQuery: {
-        ...store.tableQuery,
-        toolTipColumn,
-      },
-    })),
-  setTableColumns: (columns: Column[]) =>
-    set(store => ({
-      tableQuery: {
-        ...store.tableQuery,
-        columns,
-      },
-    })),
-  setTableData: (data: TableData<unknown>[]) =>
-    set(store => ({
-      tableQuery: {
-        ...store.tableQuery,
-        data,
-      },
-    })),
+    set(setQueryMember({ toolTipColumn })),
+  setTableColumns: (columns: Column[]) => set(setQueryMember({ columns })),
+  setTableData: (data: TableData<unknown>[]) => set(setQueryMember({ data })),
 }));
 
 export default useTableStore;
