@@ -4,7 +4,7 @@ import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import { TableProps } from '@/components/common/models';
 import useTableStore from '@/store/table-store';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 type FieldData<TFields> = {
   [K in keyof TFields]: TFields[K];
@@ -22,10 +22,14 @@ const Table = <TFields extends TableData<TFields>>({
 }: TableProps<TFields>) => {
   const { setTableColumns, setTableData } = useTableStore();
 
-  useEffect(() => {
+  const setData = useCallback(() => {
     setTableColumns(columns);
     setTableData(data);
   }, [columns, data, setTableColumns, setTableData]);
+
+  useEffect(() => {
+    setData();
+  }, [setData]);
 
   return (
     <ChakraTable variant={variant} colorScheme={colorScheme}>
