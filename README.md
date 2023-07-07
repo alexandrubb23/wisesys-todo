@@ -11,6 +11,7 @@ This is a small React app built with ViteJS that allows you to manage a list of 
 [![Axios](https://img.shields.io/badge/Axios-1.4.0-green)](https://axios-http.com/)
 [![Formik](https://img.shields.io/badge/Formik-2.4.2-red)](https://formik.org/)
 [![Yup](https://img.shields.io/badge/Yup-1.2.0-orange)](https://github.com/jquense/yup)
+[![Zustand](https://img.shields.io/badge/Zustand-4.3.9-blueviolet)](https://github.com/pmndrs/zustand)
 
 ## Features
 
@@ -29,7 +30,7 @@ Before we proceed, I have developed a convenient API for handling tasks and user
 - Set up the project locally by running the necessary installation commands.
 - Launch the project on your local machine.
 - Return to the frontend of your application to continue the integration process.
-- By following these instructions, you'll have the API up and running, ready to be - integrated into your frontend seamlessly. If you encounter any issues or have further questions, please don't hesitate to ask for assistance.
+- By following these instructions, you'll have the API up and running, ready to be integrated into your frontend seamlessly. If you encounter any issues or have further questions, please don't hesitate to ask for assistance.
 
 The API could be found [here](https://github.com/alexandrubb23/wisesys-api)
 
