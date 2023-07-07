@@ -11,8 +11,8 @@ interface TableQuery {
 
 interface TableQueryStore {
   tableQuery: TableQuery;
-  setSortColumn: (sortColumn: SortColumn) => void;
-  setToolTipColumn: (toolTipColumn: string) => void;
+  setTableSortColumn: (sortColumn: SortColumn) => void;
+  setTableToolTipColumn: (toolTipColumn: string) => void;
   setTableColumns: (columns: Column[]) => void;
   setTableData: (data: TableData<unknown>[]) => void;
 }
@@ -25,14 +25,14 @@ const useTableStore = create<TableQueryStore>(set => ({
     },
     toolTipColumn: '',
   },
-  setSortColumn: (sortColumn: SortColumn) =>
+  setTableSortColumn: (sortColumn: SortColumn) =>
     set(store => ({
       tableQuery: {
         ...store.tableQuery,
         sortColumn,
       },
     })),
-  setToolTipColumn: (toolTipColumn: string) =>
+  setTableToolTipColumn: (toolTipColumn: string) =>
     set(store => ({
       tableQuery: {
         ...store.tableQuery,

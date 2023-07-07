@@ -12,8 +12,7 @@ interface TableTdProps<T extends TableData<T>> {
 }
 
 const TableTd = <T extends TableData<T>>({ column }: TableTdProps<T>) => {
-  const setSortColumn = useTableStore(s => s.setSortColumn);
-  const setToolTipColumn = useTableStore(s => s.setToolTipColumn);
+  const { setTableSortColumn, setTableToolTipColumn } = useTableStore();
   const sortColumn = useTableStore(s => s.tableQuery.sortColumn);
 
   const isAscendingOrder = sortColumn.order === 'asc';
@@ -27,9 +26,9 @@ const TableTd = <T extends TableData<T>>({ column }: TableTdProps<T>) => {
         sortColumn.order = 'asc';
       }
 
-      setSortColumn({ ...sortColumn });
+      setTableSortColumn({ ...sortColumn });
     },
-    [sortColumn, setSortColumn, isAscendingOrder]
+    [sortColumn, setTableSortColumn, isAscendingOrder]
   );
 
   const props: TableColumnHeaderProps = {};
@@ -41,8 +40,8 @@ const TableTd = <T extends TableData<T>>({ column }: TableTdProps<T>) => {
   return (
     <Th
       {...props}
-      onMouseEnter={() => setToolTipColumn(column.path)}
-      onMouseLeave={() => setToolTipColumn('')}
+      onMouseEnter={() => setTableToolTipColumn(column.path)}
+      onMouseLeave={() => setTableToolTipColumn('')}
     >
       <TableColumnTooltip
         column={column}
