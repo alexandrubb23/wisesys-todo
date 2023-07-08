@@ -2,14 +2,14 @@ import { Tbody, Td, Tr } from '@chakra-ui/react';
 import { get } from 'lodash';
 
 import { Column } from '@/components/common/models';
-import { useTableColumns, useTableDataStore } from '@/store/table-store';
+import { useTableColumnsStore, useTableDataStore } from '@/store/table-store';
 import { TableData } from './Table';
 
 const TRUNCATE_LENGTH = 20;
 
 const TableBody = <T extends TableData<T>>() => {
   const data = useTableDataStore<T>();
-  const columns = useTableColumns<T>();
+  const columns = useTableColumnsStore<T>();
 
   const renderCell = (item: TableData<T>, column: Column<T>) => {
     if (column.content) return column.content(item);

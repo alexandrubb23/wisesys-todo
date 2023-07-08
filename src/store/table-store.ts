@@ -54,10 +54,10 @@ const useTableQueryStore = create<TableQueryStore>(set => ({
 export const useTableDataStore = <T>() =>
   useTableQueryStore(s => s.tableQuery.data) as TableData<T>[];
 
-export const useTableColumns = <T>() =>
+export const useTableColumnsStore = <T>() =>
   useTableQueryStore(s => s.tableQuery.columns) as Column<T>[];
 
-export const useTableSortColumn = () =>
+export const useTableSortColumnStore = () =>
   useTableQueryStore(s => s.tableQuery.sortColumn);
 
 export const useTableToolTipColumnStore = () =>

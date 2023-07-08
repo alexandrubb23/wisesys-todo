@@ -1,7 +1,9 @@
 import { TableColumnHeaderProps, Th } from '@chakra-ui/react';
 import { useCallback } from 'react';
 
-import useTableQueryStore, { useTableSortColumn } from '@/store/table-store';
+import useTableQueryStore, {
+  useTableSortColumnStore,
+} from '@/store/table-store';
 import { Column } from '@/components/common/models';
 import { TableData } from './Table';
 import TableColumnSortIcon from './TableColumnSortIcon';
@@ -13,7 +15,7 @@ interface TableTdProps<T extends TableData<T>> {
 
 const TableTd = <T extends TableData<T>>({ column }: TableTdProps<T>) => {
   const { setTableSortColumn, setTableToolTipColumn } = useTableQueryStore();
-  const sortColumn = useTableSortColumn();
+  const sortColumn = useTableSortColumnStore();
 
   const isAscendingOrder = sortColumn.order === 'asc';
 
