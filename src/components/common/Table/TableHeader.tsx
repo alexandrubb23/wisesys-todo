@@ -1,12 +1,11 @@
 import { Thead, Tr } from '@chakra-ui/react';
 
-import { Column } from '@/components/common/models';
-import useTableQueryStore from '@/store/table-store';
+import { useTableColumns } from '@/store/table-store';
 import { TableData } from './Table';
 import TableTd from './TableTd';
 
 const TableHeader = <T extends TableData<T>>() => {
-  const columns = useTableQueryStore(s => s.tableQuery.columns) as Column<T>[];
+  const columns = useTableColumns<T>();
 
   return (
     <Thead>

@@ -1,10 +1,10 @@
 import { Table as ChakraTable } from '@chakra-ui/react';
+import { useCallback, useEffect } from 'react';
 
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import { TableProps } from '@/components/common/models';
 import useTableQueryStore from '@/store/table-store';
-import { useCallback, useEffect } from 'react';
 
 type FieldData<T> = {
   [K in keyof T]: T[K];
