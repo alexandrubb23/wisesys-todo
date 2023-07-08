@@ -3,15 +3,15 @@ import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { Column, SortColumn } from '@/components/common/models';
 import { TableData } from './Table';
 
-interface SortColumnIconProps<TFields extends TableData<TFields>> {
-  column: Column<TFields>;
+interface SortColumnIconProps<T extends TableData<T>> {
+  column: Column<T>;
   sortColumn: SortColumn;
 }
 
-const TableColumnSortIcon = <TFields extends TableData<TFields>>({
+const TableColumnSortIcon = <T extends TableData<T>>({
   column,
   sortColumn,
-}: SortColumnIconProps<TFields>) => {
+}: SortColumnIconProps<T>) => {
   if (column.path !== sortColumn.path) return null;
 
   return sortColumn.order === 'asc' ? <ChevronUpIcon /> : <ChevronDownIcon />;

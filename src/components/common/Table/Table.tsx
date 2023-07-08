@@ -6,20 +6,20 @@ import { TableProps } from '@/components/common/models';
 import useTableQueryStore from '@/store/table-store';
 import { useCallback, useEffect } from 'react';
 
-type FieldData<TFields> = {
-  [K in keyof TFields]: TFields[K];
+type FieldData<T> = {
+  [K in keyof T]: T[K];
 };
 
-export type TableData<TFields> = {
+export type TableData<T> = {
   id: number | string;
-} & FieldData<TFields>;
+} & FieldData<T>;
 
-const Table = <TFields extends TableData<TFields>>({
+const Table = <T extends TableData<T>>({
   colorScheme = 'gray',
   columns,
   data,
   variant = 'simple',
-}: TableProps<TFields>) => {
+}: TableProps<T>) => {
   const { setTableColumns, setTableData } = useTableQueryStore();
 
   const setData = useCallback(() => {
