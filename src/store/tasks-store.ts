@@ -15,4 +15,7 @@ const useTasksQueryStore = create<TasksQueryStore>(set => ({
     set(() => ({ tasksQuery: { searchText } })),
 }));
 
+export const useTasksSearchTextStore = () =>
+  useTasksQueryStore(s => s.tasksQuery.searchText);
+
 export default useTasksQueryStore;
