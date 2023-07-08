@@ -60,4 +60,7 @@ export const useTableColumns = <T>() =>
 export const useTableSortColumn = () =>
   useTableQueryStore(s => s.tableQuery.sortColumn);
 
+export const useTableToolTipColumnStore = () =>
+  useTableQueryStore(s => s.tableQuery.toolTipColumn);
+
 export default useTableQueryStore;
